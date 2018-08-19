@@ -24,18 +24,29 @@ public class TrackView extends javax.swing.JPanel implements Runnable{
     int y = getWidth()/2;
     Thread hilo;
     ThreadRunner runner;
+    ThreadRunner runner2;
+    ThreadRunner runner3;
     
     public TrackView() {
         initComponents();
         hilo = new Thread(this);
-        runner = new ThreadRunner();
+        runner = new ThreadRunner(10,10);
+        runner2 = new ThreadRunner(100,100);
+        runner3 = new ThreadRunner(200,10);
     }
 
     public void paint(Graphics g){
         g.setColor(getBackground());
+        g.setColor(Color.black);
         g.fillRect(0, 0, getWidth(), getHeight()); //Rellena el fondo
+        
+        //Aquí tengo que crear una funcion que haga todas las que se necesiten
         g.setColor(Color.blue);
         g.fillOval(runner.getX(), runner.getY(), 30, 30);
+        g.setColor(Color.red);
+        g.fillRect(runner2.getX(), runner2.getY(), 50, 25);
+        g.setColor(Color.green);
+        g.fillOval(runner3.getX(), runner3.getY(), 40, 25);
     }
     
     public void create(){
@@ -76,6 +87,8 @@ public class TrackView extends javax.swing.JPanel implements Runnable{
     @Override
     public void run(){
         runner.start();
+        runner2.start();
+        runner3.start();
         while(true){
             try {
                 Thread.sleep(5);

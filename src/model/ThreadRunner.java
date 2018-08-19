@@ -19,20 +19,20 @@ public class ThreadRunner extends Thread implements CONSTANTS{
     private int x;
     private int y;
 
-    public ThreadRunner(){
+    public ThreadRunner(int pPosX, int pPosY){
         speed = 0;
-        x = 10;
-        y = 10;
+        x = pPosX;
+        y = pPosY;
     }
     public void run(){
         try{
             while(true){
                 while(y<WINDOW_HEIGHT-30){
-                    Thread.sleep(1000);
+                    Thread.sleep(50);
                     y+=10;
                 }
                 while(y>10){
-                    Thread.sleep(1000);
+                    Thread.sleep(50);
                     y-=10;                    
                 }
             }
