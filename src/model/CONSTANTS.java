@@ -11,4 +11,6 @@ package model;
  */
 public interface CONSTANTS {
     public static final int LANE_QUANTITY = 11;
+    public static final int WINDOW_WIDTH = 300;
+    public static final int WINDOW_HEIGHT = 300;
 }

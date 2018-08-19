@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.ThreadRunner;
 
 /**
  *
@@ -22,17 +23,19 @@ public class TrackView extends javax.swing.JPanel implements Runnable{
     int x = getWidth()/2; //La mitad del lienzo
     int y = getWidth()/2;
     Thread hilo;
+    ThreadRunner runner;
     
     public TrackView() {
         initComponents();
         hilo = new Thread(this);
+        runner = new ThreadRunner();
     }
 
     public void paint(Graphics g){
         g.setColor(getBackground());
         g.fillRect(0, 0, getWidth(), getHeight()); //Rellena el fondo
-        g.setColor(Color.red);
-        g.fillOval(x, y, 30, 30);
+        g.setColor(Color.blue);
+        g.fillOval(runner.getX(), runner.getY(), 30, 30);
     }
     
     public void create(){
@@ -72,21 +75,14 @@ public class TrackView extends javax.swing.JPanel implements Runnable{
     //Toda la animación que quiera
     @Override
     public void run(){
-        try{
-            while(true){
-                while(y<getHeight()-30){
-                    Thread.sleep(50);
-                    y+=10;
-                    repaint(); // Lo repinta en el lugar nuevo
-                }
-                while(y>10){
-                    Thread.sleep(50);
-                    y-=10;
-                    repaint(); // Lo repinta en el lugar nuevo
-                }
+        runner.start();
+        while(true){
+            try {
+                Thread.sleep(5);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(TrackView.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }catch (InterruptedException ex) {
-            Logger.getLogger(TrackView.class.getName()).log(Level.SEVERE, null, ex);
+            repaint();   
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
