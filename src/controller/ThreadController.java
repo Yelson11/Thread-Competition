@@ -11,4 +11,9 @@ package controller;
  */
 public class ThreadController {
     
+    private boolean showImages;
+    
+    public ThreadController(){
+        showImages = false;
+    }
 }

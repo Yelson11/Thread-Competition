@@ -9,6 +9,6 @@ package model;
  *
  * @author Yelson
  */
-public class ThreadRunner {
-    private int speed;
+public interface CONSTANTS {
+    public static final int LANE_QUANTITY = 11;
 }

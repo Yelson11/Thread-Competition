@@ -11,4 +11,20 @@ package model;
  */
 public class Track {
     
+    //Variable estatica para el singleton patter
+    private static Track track;
+    
+    //Atributos
+    
+    //Singleton Pattern
+    //--------------------------------------|
+    private Track(){
+    };
+    public static Track getInstance(){
+        if(track == null){
+            track = new Track();
+        }
+        return track;
+    };
+    //--------------------------------------|
 }
