@@ -15,12 +15,13 @@ import view.TrackView;
  */
 public class ThreadRunner extends Thread implements CONSTANTS{    
     
+    public boolean f = true;
     private int speed;
     private int x;
     private int y;
 
-    public ThreadRunner(int pPosX, int pPosY){
-        speed = 0;
+    public ThreadRunner(int pPosX, int pPosY, int pSpeed){
+        speed = pSpeed;
         x = pPosX;
         y = pPosY;
     }
@@ -28,13 +29,14 @@ public class ThreadRunner extends Thread implements CONSTANTS{
         try{
             while(true){
                 while(y<WINDOW_HEIGHT-30){
-                    Thread.sleep(50);
+                    Thread.sleep(20 * speed);
                     y+=10;
                 }
                 while(y>10){
-                    Thread.sleep(50);
-                    y-=10;                    
+                    Thread.sleep(25 * speed);
+                    y-=10;                   
                 }
+                f = !f;
             }
         }catch (InterruptedException ex) {
             Logger.getLogger(TrackView.class.getName()).log(Level.SEVERE, null, ex);
