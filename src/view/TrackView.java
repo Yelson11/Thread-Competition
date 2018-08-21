@@ -7,9 +7,14 @@ package view;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import model.ThreadRunner;
+import model.CONSTANTS;
 
 /**
  *
@@ -20,6 +25,7 @@ public class TrackView extends javax.swing.JPanel implements Runnable{
     /**
      * Creates new form TrackView
      */
+    Image background;
     int x = getWidth()/2; //La mitad del lienzo
     int y = getWidth()/2;
     Thread hilo;
@@ -31,15 +37,19 @@ public class TrackView extends javax.swing.JPanel implements Runnable{
         initComponents();
         
         hilo = new Thread(this);
-        runner = new ThreadRunner(10,10,1);
+        runner = new ThreadRunner(20,10,1);
         runner2 = new ThreadRunner(100,100,2);
-        runner3 = new ThreadRunner(200,270,3);
+        runner3 = new ThreadRunner(190,270,3);
+        try{
+            background = ImageIO.read(new File("src/images/pista.png"));
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
 
     public void paint(Graphics g){
-        g.setColor(getBackground());
-        g.setColor(Color.black);
-        g.fillRect(0, 0, getWidth(), getHeight()); //Rellena el fondo
+        //Pinta la imagen de fondo
+        g.drawImage(background, 0, 0, this);
         
         //Aquí tengo que crear una funcion que haga todas las que se necesiten
         paintFigure(g, runner);
