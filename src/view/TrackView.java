@@ -41,7 +41,7 @@ public class TrackView extends javax.swing.JPanel implements Runnable{
         runner2 = new ThreadRunner(100,100,2);
         runner3 = new ThreadRunner(190,270,3);
         try{
-            background = ImageIO.read(new File("src/images/pista.png"));
+            background = ImageIO.read(new File("src/images/autopista.png"));
         }catch(IOException e){
             e.printStackTrace();
         }
@@ -52,20 +52,25 @@ public class TrackView extends javax.swing.JPanel implements Runnable{
         g.drawImage(background, 0, 0, this);
         
         //Aquí tengo que crear una funcion que haga todas las que se necesiten
-        paintFigure(g, runner);
+        try{
+            paintFigure(g, runner);   
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         g.setColor(Color.red);
         g.fillRect(runner2.getX(), runner2.getY(), 50, 25);
         g.setColor(Color.green);
         g.fillOval(runner3.getX(), runner3.getY(), 40, 25);
     }
     
-    public void paintFigure(Graphics g, ThreadRunner t){
+    public void paintFigure(Graphics g, ThreadRunner t) throws IOException{
         if (t.f == true){
             g.setColor(Color.blue);
             g.fillOval(t.getX(), t.getY(), 30, 30);
         }else{
-            g.setColor(Color.white);
-            g.fillOval(t.getX(), t.getY(), 30, 30);
+            Image image = ImageIO.read(new File("src/images/rojo.png"));
+            Image imageScaled = image.getScaledInstance(20, 40, Image.SCALE_DEFAULT);
+            g.drawImage(imageScaled, t.getX(), t.getY(), this);
         }
     }
     

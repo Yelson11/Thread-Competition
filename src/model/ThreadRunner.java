@@ -29,12 +29,12 @@ public class ThreadRunner extends Thread implements CONSTANTS{
         try{
             while(true){
                 while(y<WINDOW_HEIGHT-30){
-                    Thread.sleep(20 * speed);
-                    y+=10;
+                    Thread.sleep(5 * speed);
+                    y+=1;
                 }
                 while(y>10){
-                    Thread.sleep(25 * speed);
-                    y-=10;                   
+                    Thread.sleep(5 * speed);
+                    y-=1;                   
                 }
                 f = !f;
             }
