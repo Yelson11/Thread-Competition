@@ -5,10 +5,16 @@
  */
 package view;
 
+import model.*;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import model.ThreadRunner;
 
 /**
@@ -16,38 +22,39 @@ import model.ThreadRunner;
  * @author Yelson
  */
 public class TrackView extends javax.swing.JPanel implements Runnable{
-
-    /**
-     * Creates new form TrackView
-     */
+    
     int x = getWidth()/2; //La mitad del lienzo
     int y = getWidth()/2;
     Thread hilo;
-    ThreadRunner runner;
-    ThreadRunner runner2;
-    ThreadRunner runner3;
+    private Track track;
+    private int sleepThreadTime;
+    private int sleepTimePaint;
+    private boolean runningThread;
+    private Graphics g;
+
     
     public TrackView() {
         initComponents();
+        this.runningThread = true;
         hilo = new Thread(this);
-        runner = new ThreadRunner(10,10);
-        runner2 = new ThreadRunner(100,100);
-        runner3 = new ThreadRunner(200,10);
+        track = Track.getInstance();
     }
 
     public void paint(Graphics g){
         g.setColor(getBackground());
-        g.setColor(Color.black);
+        //g.setColor(Color.black);
         g.fillRect(0, 0, getWidth(), getHeight()); //Rellena el fondo
         
-        //Aquí tengo que crear una funcion que haga todas las que se necesiten
-        g.setColor(Color.blue);
-        g.fillOval(runner.getX(), runner.getY(), 30, 30);
-        g.setColor(Color.red);
-        g.fillRect(runner2.getX(), runner2.getY(), 50, 25);
-        g.setColor(Color.green);
-        g.fillOval(runner3.getX(), runner3.getY(), 40, 25);
+        Lane[] listTrack = track.getListTrack();
+        for(int i = 0; i < listTrack.length; i++){
+            ArrayList<ThreadRunner> threads = listTrack[i].getRunnerList();
+            for(int j = 0; j < threads.size(); j++){
+                threads.get(j).getFigure().draw(g);
+            }
+        }
+        
     }
+   
     
     public void create(){
         hilo.start();
@@ -86,18 +93,18 @@ public class TrackView extends javax.swing.JPanel implements Runnable{
     //Toda la animación que quiera
     @Override
     public void run(){
-        runner.start();
-        runner2.start();
-        runner3.start();
+        //Este es el método que repinta la interfaz...
         while(true){
             try {
-                Thread.sleep(5);
+                Thread.sleep(1);
             } catch (InterruptedException ex) {
                 Logger.getLogger(TrackView.class.getName()).log(Level.SEVERE, null, ex);
             }
             repaint();   
         }
+        
     }
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }
