@@ -14,7 +14,9 @@ import javax.imageio.ImageIO;
 public class Figure implements CONSTANTS{
 
     private static final int size = 30;
-    
+    private Image imageRed;
+    private Image imageBlue;
+    private Image imageWhite;
     private boolean showImage;
     private double posX;
     private double posY;
@@ -29,6 +31,16 @@ public class Figure implements CONSTANTS{
         direction = pDirection;
         type = pType;
         color = generateColor();
+        try{
+            Image image = ImageIO.read(new File("src/images/rojo2.png"));
+            imageRed = image.getScaledInstance(RUNNER_IMAGE_WIDTH, RUNNER_IMAGE_HEIGHT, Image.SCALE_DEFAULT);
+            Image image2 = ImageIO.read(new File("src/images/azul2.png"));
+            imageBlue = image.getScaledInstance(RUNNER_IMAGE_WIDTH, RUNNER_IMAGE_HEIGHT, Image.SCALE_DEFAULT);
+            Image image3 = ImageIO.read(new File("src/images/blanco2.png"));
+            imageWhite = image.getScaledInstance(RUNNER_IMAGE_WIDTH, RUNNER_IMAGE_HEIGHT, Image.SCALE_DEFAULT);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
         if (direction!=1)
             posY = WINDOW_WIDTH;
         else 
@@ -47,26 +59,16 @@ public class Figure implements CONSTANTS{
         if(showImage){
             Image image;
             Image imageScaled;
-            try{
-                switch (type) {
-                case 1:
-                    image = ImageIO.read(new File("src/images/rojo2.png"));
-                    imageScaled = image.getScaledInstance(RUNNER_IMAGE_WIDTH, RUNNER_IMAGE_HEIGHT, Image.SCALE_DEFAULT);
-                    g.drawImage(imageScaled, (int)posX, (int)posY, null);
-                    break;
-                case 2:
-                    image = ImageIO.read(new File("src/images/blanco2.png"));
-                    imageScaled = image.getScaledInstance(RUNNER_IMAGE_WIDTH, RUNNER_IMAGE_HEIGHT, Image.SCALE_DEFAULT);
-                    g.drawImage(imageScaled, (int)posX, (int)posY, null);
-                    break;
-                case 3:
-                    image = ImageIO.read(new File("src/images/azul2.png"));
-                    imageScaled = image.getScaledInstance(RUNNER_IMAGE_WIDTH, RUNNER_IMAGE_HEIGHT, Image.SCALE_DEFAULT);
-                    g.drawImage(imageScaled, (int)posX, (int)posY, null);
-                    break;
-                }
-            }catch(IOException e){
-                e.printStackTrace();
+            switch (type) {
+            case 1:
+                g.drawImage(imageRed, (int)posX, (int)posY, null);
+                break;
+            case 2:
+                g.drawImage(imageWhite, (int)posX, (int)posY, null);
+                break;
+            case 3:
+                g.drawImage(imageBlue, (int)posX, (int)posY, null);
+                break;
             }
         }else{
             g.setColor(color);
