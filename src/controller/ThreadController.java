@@ -23,30 +23,19 @@ public class ThreadController extends Thread implements CONSTANTS{
     private int direction;
     private int quantity;
     private int speed;
+    private boolean state;
     
      public ThreadController(){
         track = Track.getInstance();
         direction = 1;
         showImages = false;
+        state = true;
     }
      
     //Este metodo debe verificar los carriles disponibles y etc
     public void insertRunners(int pQuantity, int pSpeed){
         quantity = pQuantity;
         speed = pSpeed;     
-        /*
-        try{
-            for (int i = 0; i < pQuantity; i++){
-                int num = 0; //(int)(Math.random() * 11 + 1) - 1;
-                track.addFigure(num, direction, Speed); // posX, posY, speed
-            //Inicia el hilo que acaba de insertar
-                int index = track.getListTrack()[num].getRunnerList().size()-1;
-                startRunner(track.getListTrack()[num].getRunnerList().get(index));
-            }
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        */
     }
     
     public void changeImageStatus(boolean pStatus){
@@ -55,12 +44,11 @@ public class ThreadController extends Thread implements CONSTANTS{
     
     public void run(){
         try{
-            for (int i = 0; i < quantity; i++){
+            for (int i = 0; i < quantity; i++){   //esto hay que cambiarlo, es una chanchada
                 int num = (int)(Math.random() * 11 + 1) - 1;
                 track.addFigure(num, direction, speed, showImages); // posX, posY, speed
-            //Inicia el hilo que acaba de insertar
                 int index = track.getListTrack()[num].getRunnerList().size()-1;
-                startRunner(track.getListTrack()[num].getRunnerList().get(index));
+                startRunner(track.getListTrack()[num].getRunnerList().get(index)); //Inicia el hilo que acaba de insertar
             }
             quantity = 0;
         }catch (InterruptedException ex) {
@@ -68,9 +56,57 @@ public class ThreadController extends Thread implements CONSTANTS{
         }
     }
     
+    public void stopThread(){
+        Lane[] listTrack = track.getListTrack();
+        for(int i = 0; i < listTrack.length; i++){
+            ArrayList<ThreadRunner> threads = listTrack[i].getRunnerList();
+            for(int j = 0; j < threads.size(); j++){
+                int num = threads.get(j).getFigure().getPosY();
+                if (num < -30 || num > WINDOW_WIDTH + 30 ){
+                    threads.get(j).stop();
+                    threads.remove(threads.get(j));
+                }
+            }
+        }
+    }
+    
+    public void suspendThreads(){
+        Lane[] listTrack = track.getListTrack();
+        for(int i = 0; i < listTrack.length; i++){
+            ArrayList<ThreadRunner> threads = listTrack[i].getRunnerList();
+            for(int j = 0; j < threads.size(); j++){
+                threads.get(j).suspend();
+            }
+        }
+    }
+    
+    public void resumeThreads(){
+        Lane[] listTrack = track.getListTrack();
+        for(int i = 0; i < listTrack.length; i++){
+            ArrayList<ThreadRunner> threads = listTrack[i].getRunnerList();
+            for(int j = 0; j < threads.size(); j++){
+                threads.get(j).resume();
+            }
+        }
+    }
+    
+    public void stateThread(){
+        if (state){
+            this.suspendThreads();
+            this.suspend();
+            state = false;
+        }
+        else{
+            this.resumeThreads();
+            this.resume();
+            state = true;
+        }
+           
+    }
+    
     public void startRunner(ThreadRunner pThread) throws InterruptedException{
-        Thread.sleep(1000);
         pThread.start();
+        Thread.sleep(1000);
     }
 
     public void revert(){

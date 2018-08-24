@@ -30,7 +30,7 @@ public class ThreadRunner extends Thread implements CONSTANTS{
     
     public void run(){
         try{
-            Thread.sleep(500);
+            //Thread.sleep(500);
             while(true){
                 figure.move();
                 Thread.sleep(speed*25);

@@ -14,9 +14,8 @@ import javax.imageio.ImageIO;
 public class Figure implements CONSTANTS{
 
     private static final int size = 30;
-    private Image imageRed;
-    private Image imageBlue;
-    private Image imageWhite;
+    private Image imageUp;
+    private Image imageDown;
     private boolean showImage;
     private double posX;
     private double posY;
@@ -32,17 +31,25 @@ public class Figure implements CONSTANTS{
         type = pType;
         color = generateColor();
         try{
-            Image image = ImageIO.read(new File("src/images/rojo2.png"));
-            imageRed = image.getScaledInstance(RUNNER_IMAGE_WIDTH, RUNNER_IMAGE_HEIGHT, Image.SCALE_DEFAULT);
-            Image image2 = ImageIO.read(new File("src/images/azul2.png"));
-            imageBlue = image.getScaledInstance(RUNNER_IMAGE_WIDTH, RUNNER_IMAGE_HEIGHT, Image.SCALE_DEFAULT);
-            Image image3 = ImageIO.read(new File("src/images/blanco2.png"));
-            imageWhite = image.getScaledInstance(RUNNER_IMAGE_WIDTH, RUNNER_IMAGE_HEIGHT, Image.SCALE_DEFAULT);
+            switch (type) {
+            case 1:
+                imageUp = ImageIO.read(new File("src/images/rojo2.png"));
+                imageUp = imageUp.getScaledInstance(RUNNER_IMAGE_WIDTH, RUNNER_IMAGE_HEIGHT, Image.SCALE_DEFAULT);
+                break;
+            case 2:
+                imageUp = ImageIO.read(new File("src/images/blanco2.png"));
+                imageUp = imageUp.getScaledInstance(RUNNER_IMAGE_WIDTH, RUNNER_IMAGE_HEIGHT, Image.SCALE_DEFAULT);
+                break;
+            case 3:
+                imageUp = ImageIO.read(new File("src/images/azul2.png"));
+                imageUp = imageUp.getScaledInstance(RUNNER_IMAGE_WIDTH, RUNNER_IMAGE_HEIGHT, Image.SCALE_DEFAULT);
+                break;
+            }
         }catch(IOException e){
             e.printStackTrace();
         }
         if (direction!=1)
-            posY = WINDOW_WIDTH;
+            posY = WINDOW_WIDTH + 30 ;
         else 
             posY = -30;
     }
@@ -52,24 +59,12 @@ public class Figure implements CONSTANTS{
     }
     
     public void revert(){
-        direction *= -1; 
+        direction *= -1;
     }
 
     public void draw(Graphics g) {
         if(showImage){
-            Image image;
-            Image imageScaled;
-            switch (type) {
-            case 1:
-                g.drawImage(imageRed, (int)posX, (int)posY, null);
-                break;
-            case 2:
-                g.drawImage(imageWhite, (int)posX, (int)posY, null);
-                break;
-            case 3:
-                g.drawImage(imageBlue, (int)posX, (int)posY, null);
-                break;
-            }
+            g.drawImage(imageUp, (int)posX, (int)posY, null);
         }else{
             g.setColor(color);
             switch (type) {
@@ -105,4 +100,9 @@ public class Figure implements CONSTANTS{
     public void setShowImage(boolean showImage) {
         this.showImage = showImage;
     }
+    
+    public int getPosY(){
+        return (int) posY;
+    }
+    
 }

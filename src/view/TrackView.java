@@ -31,6 +31,7 @@ public class TrackView extends javax.swing.JPanel implements Runnable{
     private int sleepTimePaint;
     private boolean runningThread;
     private Graphics g;
+    private boolean state;
 
     
     public TrackView() {
@@ -38,6 +39,7 @@ public class TrackView extends javax.swing.JPanel implements Runnable{
         this.runningThread = true;
         hilo = new Thread(this);
         track = Track.getInstance();
+        state = true;
     }
 
     public void paint(Graphics g){
@@ -67,6 +69,16 @@ public class TrackView extends javax.swing.JPanel implements Runnable{
         hilo.resume();
     }
     
+    public void stateThread(){
+        if (state){
+            state = false;
+            hilo.suspend();
+        }
+        else{
+            state = true;
+            hilo.resume();
+        }       
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
