@@ -178,6 +178,7 @@ public class GraphicInterface extends javax.swing.JFrame {
 
     private void cbxImagesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxImagesActionPerformed
         // TODO add your handling code here:
+        System.out.println("jaja");
     }//GEN-LAST:event_cbxImagesActionPerformed
 
     private void txtValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValueActionPerformed
