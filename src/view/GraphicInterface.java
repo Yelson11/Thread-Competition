@@ -14,11 +14,12 @@ import controller.ThreadController;
  */
 public class GraphicInterface extends javax.swing.JFrame {
 
-    private boolean check;
     private ThreadController controller;
+    private boolean checkStatus;
     
     public GraphicInterface() {
         initComponents();
+        checkStatus = false;
         controller = new ThreadController();
         trackView1.create();
     }
@@ -177,7 +178,9 @@ public class GraphicInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtBarrierActionPerformed
 
     private void cbxImagesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxImagesActionPerformed
-        // TODO add your handling code here:
+        checkStatus = !checkStatus;
+        controller.setShowImages(checkStatus);
+        controller.changeImageStatus(checkStatus);
     }//GEN-LAST:event_cbxImagesActionPerformed
 
     private void txtValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValueActionPerformed

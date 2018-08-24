@@ -21,8 +21,8 @@ public class ThreadRunner extends Thread implements CONSTANTS{
     private int x;
     private int y;
 
-    public ThreadRunner(int pPosX, int pPosY, int pSpeed){
-        figure = new Figure(pPosX ,pPosY, pSpeed); //posX tiene que * la "metrica"
+    public ThreadRunner(int pPosX, int pPosY, int pSpeed, boolean pShowImage){
+        figure = new Figure(pPosX ,pPosY, pSpeed, pShowImage); //posX tiene que * la "metrica"
         speed = pSpeed;
         x = pPosX; //aqui es la posicion del carril
         y = pPosY;

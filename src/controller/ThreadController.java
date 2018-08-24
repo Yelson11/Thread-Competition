@@ -49,11 +49,15 @@ public class ThreadController extends Thread implements CONSTANTS{
         */
     }
     
+    public void changeImageStatus(boolean pStatus){
+        track.changeImageStatus(pStatus);
+    }
+    
     public void run(){
         try{
             for (int i = 0; i < quantity; i++){
                 int num = (int)(Math.random() * 11 + 1) - 1;
-                track.addFigure(num, direction, speed); // posX, posY, speed
+                track.addFigure(num, direction, speed, showImages); // posX, posY, speed
             //Inicia el hilo que acaba de insertar
                 int index = track.getListTrack()[num].getRunnerList().size()-1;
                 startRunner(track.getListTrack()[num].getRunnerList().get(index));
@@ -73,6 +77,8 @@ public class ThreadController extends Thread implements CONSTANTS{
         direction*= -1;
         track.revertDirection();
     }
+    
+    
     //Getters and Setters
     public boolean isShowImages() {
         return showImages;

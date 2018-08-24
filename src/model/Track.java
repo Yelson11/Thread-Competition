@@ -39,12 +39,19 @@ public class Track implements CONSTANTS {
         return track;
     };
     
-    public void addFigure(int pLane, int pDirection, int pSpeed){
-        ThreadRunner threadRunner = new ThreadRunner(pLane, pDirection, pSpeed);
+    public void addFigure(int pLane, int pDirection, int pSpeed, boolean pShowImage){
+        ThreadRunner threadRunner = new ThreadRunner(pLane, pDirection, pSpeed, pShowImage);
         listTrack[pLane].getRunnerList().add(threadRunner);
     }
     
-
+    public void changeImageStatus(boolean pStatus){
+        for (int i = 0; i < LANE_QUANTITY; i++){
+            for(int j = 0; j < listTrack[i].getRunnerList().size(); j++){
+                listTrack[i].getRunnerList().get(j).getFigure().setShowImage(pStatus);
+            }
+        }
+    }
+    
     public Lane[] getListTrack() {
         return listTrack;
     }

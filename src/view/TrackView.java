@@ -41,8 +41,7 @@ public class TrackView extends javax.swing.JPanel implements Runnable{
     }
 
     public void paint(Graphics g){
-        g.setColor(getBackground());
-        //g.setColor(Color.black);
+        g.setColor(Color.GRAY);
         g.fillRect(0, 0, getWidth(), getHeight()); //Rellena el fondo
         
         Lane[] listTrack = track.getListTrack();
