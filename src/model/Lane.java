@@ -7,10 +7,13 @@ package model;
 
 import java.util.ArrayList;
 
+<<<<<<< HEAD
 /**
  *
  * @author Administrator
  */
+=======
+>>>>>>> yelson
 public class Lane {
     private ArrayList<ThreadRunner> runnerList;
     
