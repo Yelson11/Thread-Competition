@@ -7,10 +7,6 @@ package model;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author Administrator
- */
 public class Lane {
     private ArrayList<ThreadRunner> runnerList;
     

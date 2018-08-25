@@ -33,16 +33,22 @@ public class Figure implements CONSTANTS{
         try{
             switch (type) {
             case 1:
-                imageUp = ImageIO.read(new File("src/images/rojo2.png"));
+                imageUp = ImageIO.read(new File("src/images/redUp.png"));
                 imageUp = imageUp.getScaledInstance(RUNNER_IMAGE_WIDTH, RUNNER_IMAGE_HEIGHT, Image.SCALE_DEFAULT);
+                imageDown = ImageIO.read(new File("src/images/redDown.png"));
+                imageDown = imageDown.getScaledInstance(RUNNER_IMAGE_WIDTH, RUNNER_IMAGE_HEIGHT, Image.SCALE_DEFAULT);
                 break;
             case 2:
-                imageUp = ImageIO.read(new File("src/images/blanco2.png"));
+                imageUp = ImageIO.read(new File("src/images/whiteUp.png"));
                 imageUp = imageUp.getScaledInstance(RUNNER_IMAGE_WIDTH, RUNNER_IMAGE_HEIGHT, Image.SCALE_DEFAULT);
+                imageDown = ImageIO.read(new File("src/images/whiteDown.png"));
+                imageDown = imageDown.getScaledInstance(RUNNER_IMAGE_WIDTH, RUNNER_IMAGE_HEIGHT, Image.SCALE_DEFAULT);
                 break;
             case 3:
-                imageUp = ImageIO.read(new File("src/images/azul2.png"));
+                imageUp = ImageIO.read(new File("src/images/blueUp.png"));
                 imageUp = imageUp.getScaledInstance(RUNNER_IMAGE_WIDTH, RUNNER_IMAGE_HEIGHT, Image.SCALE_DEFAULT);
+                imageDown = ImageIO.read(new File("src/images/blueDown.png"));
+                imageDown = imageDown.getScaledInstance(RUNNER_IMAGE_WIDTH, RUNNER_IMAGE_HEIGHT, Image.SCALE_DEFAULT);
                 break;
             }
         }catch(IOException e){
@@ -64,7 +70,12 @@ public class Figure implements CONSTANTS{
 
     public void draw(Graphics g) {
         if(showImage){
-            g.drawImage(imageUp, (int)posX, (int)posY, null);
+            if (direction == 1){
+                g.drawImage(imageDown, (int)posX, (int)posY, null);
+            }else{
+                g.drawImage(imageUp, (int)posX, (int)posY, null);
+            }
+            
         }else{
             g.setColor(color);
             switch (type) {
@@ -88,7 +99,7 @@ public class Figure implements CONSTANTS{
                 color = Color.red;
                 break;
             case 2:
-                color = Color.green;
+                color = Color.white;
                 break;
             case 3:
                 color = Color.blue;
