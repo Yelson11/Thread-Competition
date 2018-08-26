@@ -13,6 +13,8 @@ public interface CONSTANTS {
     public static final int LANE_QUANTITY = 11;
     public static final int WINDOW_WIDTH = 600;
     public static final int WINDOW_HEIGHT = 300; 
-    public static final int RUNNER_IMAGE_WIDTH = 20; 
-    public static final int RUNNER_IMAGE_HEIGHT = 40; 
+    public static final int STREET_HORIZONTAL_SCALE = 80; 
+    public static final int STREET_VERTICAL_SCALE = 300; 
+    public static final int RUNNER_IMAGE_WIDTH = 25; 
+    public static final int RUNNER_IMAGE_HEIGHT = 50; 
 }
