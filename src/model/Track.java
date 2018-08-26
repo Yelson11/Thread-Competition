@@ -65,10 +65,20 @@ public class Track implements CONSTANTS {
          }
     }
      
-    public void activateBarriers(){
+    public void activateAllBarriers(){
         for(int i = 0; i < this.listTrack.length; i++){
-             this.listTrack[i].setBarrier(!listTrack[i].getBarrier());
+             this.listTrack[i].setBarrier(true);
          }
+    }
+    
+    public void deactivateAllBarriers(){
+        for(int i = 0; i < this.listTrack.length; i++){
+             this.listTrack[i].setBarrier(false);
+         }
+    }
+    
+    public void activateBarrier(int pLane){
+        this.listTrack[pLane].changeBarrierStatus();
     }
      
     public void addFigure(int pLane, int pDirection, int pSpeed, boolean pShowImage){

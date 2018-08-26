@@ -21,6 +21,9 @@ public class Lane {
             runnerList.get(i).getFigure().revert();
         }
     }
+    public void changeBarrierStatus(){
+        barrier = !barrier;
+    }
     public ArrayList<ThreadRunner> getRunnerList() {
         return runnerList;
     }
@@ -28,12 +31,11 @@ public class Lane {
     public void setRunnerList(ArrayList<ThreadRunner> runnerList) {
         this.runnerList = runnerList;
     }
-
-    public boolean getBarrier() {
-        return barrier;
+    
+    public void setBarrier(boolean pState){
+        barrier = pState;
     }
-
-    public void setBarrier(boolean barrier) {
-        this.barrier = barrier;
+    public boolean getBarrier(){
+        return barrier;
     }
 }
