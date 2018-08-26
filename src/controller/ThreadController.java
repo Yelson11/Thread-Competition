@@ -12,17 +12,13 @@ import java.util.logging.Logger;
 import model.*;
 import view.TrackView;
 
-/**
- *
- * @author Yelson
- */
 public class ThreadController extends Thread implements CONSTANTS{
     
     private boolean showImages;
     private Track track;
     private int direction;
-    private int quantity;
-    private int speed;
+    private boolean insert;
+    private ThreadCreator[] threadPool;
     private boolean state;
     
      public ThreadController(){
@@ -30,30 +26,23 @@ public class ThreadController extends Thread implements CONSTANTS{
         direction = 1;
         showImages = false;
         state = true;
+        insert = true;
+        threadPool = new ThreadCreator[3];
+        for(int i = 0; i < 3; i++){
+            threadPool[i] = new ThreadCreator(i+1, direction, showImages);
+            threadPool[i].start();
+        }
     }
      
-    //Este metodo debe verificar los carriles disponibles y etc
-    public void insertRunners(int pQuantity, int pSpeed){
-        quantity = pQuantity;
-        speed = pSpeed;     
-    }
-    
     public void changeImageStatus(boolean pStatus){
         track.changeImageStatus(pStatus);
+        for(int i = 0; i < 3; i++){
+            threadPool[i].setShowImages(pStatus);
+        }
     }
     
-    public void run(){
-        try{
-            for (int i = 0; i < quantity; i++){   //esto hay que cambiarlo, es una chanchada
-                int num = (int)(Math.random() * 11 + 1) - 1;
-                track.addFigure(num, direction, speed, showImages); // posX, posY, speed
-                int index = track.getListTrack()[num].getRunnerList().size()-1;
-                startRunner(track.getListTrack()[num].getRunnerList().get(index)); //Inicia el hilo que acaba de insertar
-            }
-            quantity = 0;
-        }catch (InterruptedException ex) {
-            Logger.getLogger(TrackView.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public void createThreads(int pQuantity, int pSpeed){
+        threadPool[pSpeed-1].setQuantity(pQuantity);
     }
     
     public void stopThread(){
@@ -101,19 +90,25 @@ public class ThreadController extends Thread implements CONSTANTS{
             this.resume();
             state = true;
         }
-           
-    }
-    
-    public void startRunner(ThreadRunner pThread) throws InterruptedException{
-        pThread.start();
-        Thread.sleep(1000);
     }
 
     public void revert(){
         direction*= -1;
         track.revertDirection();
+        for(int i = 0; i < 3; i++){
+            threadPool[i].setDirection(direction);
+        }
     }
     
+    @Override
+    public void run(){
+        while(true){
+            stopThread();
+            try{
+                Thread.sleep(50);   
+            }catch(Exception e){}
+        }
+    }
     
     //Getters and Setters
     public boolean isShowImages() {

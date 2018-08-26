@@ -26,6 +26,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         interruptStatus = true;
         controller = new ThreadController();
         trackView1.create();
+        controller.start();
     }
     
 
@@ -197,8 +198,8 @@ public class GraphicInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_txtValueActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
-        controller.insertRunners(Integer.parseInt(this.txtValue.getText()), cmbSpeed.getSelectedIndex()+1);
-        controller.start();
+        controller.createThreads(Integer.parseInt(this.txtValue.getText()), cmbSpeed.getSelectedIndex()+1);
+        //controller.start();
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnInterruptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInterruptActionPerformed
