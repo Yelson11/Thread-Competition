@@ -25,7 +25,7 @@ public class Figure implements CONSTANTS{
 
     public Figure(int pPosX, int pDirection, int pType, boolean pShowImage) {   
                 
-        posX = pPosX * 50; //Arreglar en las constantes (escalas)
+        posX = pPosX * STREET_HORIZONTAL_SCALE + 50; //Arreglar en las constantes (escalas)
         showImage = pShowImage;
         direction = pDirection;
         type = pType;

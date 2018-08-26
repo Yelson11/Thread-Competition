@@ -9,9 +9,11 @@ import java.util.ArrayList;
 
 public class Lane {
     private ArrayList<ThreadRunner> runnerList;
+    private boolean barrier;
     
     public Lane() {
         this.runnerList = new ArrayList<ThreadRunner>();
+        barrier = false;
     }
 
     public void revert(){
@@ -26,6 +28,12 @@ public class Lane {
     public void setRunnerList(ArrayList<ThreadRunner> runnerList) {
         this.runnerList = runnerList;
     }
-    
-    
+
+    public boolean getBarrier() {
+        return barrier;
+    }
+
+    public void setBarrier(boolean barrier) {
+        this.barrier = barrier;
+    }
 }
