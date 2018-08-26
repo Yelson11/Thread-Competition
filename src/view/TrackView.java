@@ -56,7 +56,6 @@ public class TrackView extends javax.swing.JPanel implements Runnable{
         
     }
    
-    
     public void create(){
         hilo.start();
     }

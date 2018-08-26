@@ -7,6 +7,7 @@ package view;
 
 import java.awt.Graphics;
 import controller.ThreadController;
+import java.util.ArrayList;
 
 /**
  *
@@ -174,7 +175,10 @@ public class GraphicInterface extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtBarrierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtBarrierActionPerformed
-        // TODO add your handling code here:
+        ArrayList<Integer> listNum = new ArrayList<Integer>();
+        listNum.add(1);
+        listNum.add(4);
+        controller.barrier(listNum);
     }//GEN-LAST:event_jbtBarrierActionPerformed
 
     private void cbxImagesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxImagesActionPerformed

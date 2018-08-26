@@ -90,6 +90,16 @@ public class ThreadController extends Thread implements CONSTANTS{
         }
     }
     
+    public void barrier(ArrayList<Integer> listNum){
+        int size = listNum.size();
+        for(int i = 0; i < size; i++){
+            ArrayList<ThreadRunner> threads = track.getListTrack()[listNum.get(i)].getRunnerList();
+            for(int j = 0; j < threads.size(); j++){
+                threads.get(j).suspend();
+            }
+        }
+    }
+    
     public void stateThread(){
         if (state){
             this.suspendThreads();
