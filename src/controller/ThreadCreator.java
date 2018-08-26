@@ -59,7 +59,6 @@ public class ThreadCreator extends Thread{
         return track;
     }
 
-
     public int getQuantity() {
         return quantity;
     }
