@@ -62,7 +62,6 @@ public class TrackView extends javax.swing.JPanel implements Runnable{
                 threads.get(j).getFigure().draw(g);
             }
         }
-        
     }
    
     public void create(){

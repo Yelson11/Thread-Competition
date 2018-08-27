@@ -18,15 +18,14 @@ public class GraphicInterface extends javax.swing.JFrame {
     private ThreadController controller;
     private boolean checkStatus;
     private boolean interruptStatus;
-    private boolean barrierStatus;
     
     public GraphicInterface() {
         initComponents();
         checkStatus = false;
-        barrierStatus = false;
         interruptStatus = true;
         controller = new ThreadController();
         trackView1.create();
+        controller.start();
     }
     
 
@@ -109,7 +108,7 @@ public class GraphicInterface extends javax.swing.JFrame {
             }
         });
 
-        btnAllBarriers.setText("Activate All Barriers");
+        btnAllBarriers.setText("Deactivate All Barriers");
         btnAllBarriers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAllBarriersActionPerformed(evt);
@@ -138,15 +137,15 @@ public class GraphicInterface extends javax.swing.JFrame {
                         .addComponent(txtValue, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnCreate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(42, 42, 42)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtBarrier, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnBarries, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtBarrier, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBarries, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnAllBarriers, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnInterrupt, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
                     .addComponent(btnRevert, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -202,8 +201,8 @@ public class GraphicInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_txtValueActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
-        controller.insertRunners(Integer.parseInt(this.txtValue.getText()), cmbSpeed.getSelectedIndex()+1);
-        controller.start();
+        controller.createThreads(Integer.parseInt(this.txtValue.getText()), cmbSpeed.getSelectedIndex()+1);
+        txtValue.setText("");
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnInterruptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInterruptActionPerformed
@@ -224,38 +223,23 @@ public class GraphicInterface extends javax.swing.JFrame {
         trackView1.continueThread();
     }//GEN-LAST:event_btnSimulationActionPerformed
 
-    private void btnAllBarriersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllBarriersActionPerformed
-        if(barrierStatus){
-            btnAllBarriers.setText("Activate All Barriers");
-            controller.getTrack().deactivateAllBarriers();
-        }else{
-            btnAllBarriers.setText("Deactivate All Barriers");
-            controller.getTrack().activateAllBarriers();
-        }
-        barrierStatus = !barrierStatus;
-    }//GEN-LAST:event_btnAllBarriersActionPerformed
-
     private void btnBarriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBarriesActionPerformed
         String barriers = txtBarrier.getText();
-        String barrierList[] = barriers.split(",");
-        for(int i = 0; i < barrierList.length; i++){
-            int lane = Integer.parseInt(barrierList[i]);
-           controller.getTrack().activateBarrier(lane-1);
-        }
-        /*
-        if (barriers.contains(",")){
+        if(barriers.equals("")){
+            controller.getTrack().activateAllBarriers();
+        }else{
             String barrierList[] = barriers.split(",");
             for(int i = 0; i < barrierList.length; i++){
                 int lane = Integer.parseInt(barrierList[i]);
-                controller.getTrack().activateBarrier(lane-1);
+               controller.getTrack().activateBarrier(lane-1);
             }
-        }else{
-            int lane = Integer.parseInt(barriers);
-            controller.getTrack().activateBarrier(lane-1);
         }
-        */
-        //controller.getTrack().activateAllBarriers();
+        txtBarrier.setText("");
     }//GEN-LAST:event_btnBarriesActionPerformed
+
+    private void btnAllBarriersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllBarriersActionPerformed
+        controller.getTrack().deactivateAllBarriers();
+    }//GEN-LAST:event_btnAllBarriersActionPerformed
 
     /**
      * @param args the command line arguments
