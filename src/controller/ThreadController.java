@@ -34,6 +34,7 @@ public class ThreadController extends Thread implements CONSTANTS{
         }
     }
      
+     
     public void changeImageStatus(boolean pStatus){
         track.changeImageStatus(pStatus);
         for(int i = 0; i < 3; i++){
@@ -58,6 +59,32 @@ public class ThreadController extends Thread implements CONSTANTS{
             }
         }
     }
+    
+    
+    public void controlCollision(){
+        Lane[] listTrack = track.getListTrack();
+        for(int i = 0; i < listTrack.length; i++){
+            ArrayList<ThreadRunner> threads = listTrack[i].getRunnerList();
+            int size = threads.size();
+            for(int j = 0; j < size; j++){
+                if (j != 0)
+                {
+                    if (threads.get(j-direction).getFigure().getPosY() < threads.get(j).getFigure().getPosY()+35){
+                        threads.get(j).setSpeed(threads.get(j-direction).getSpeed());
+                        System.out.println("JIJIJIJIJIJ");
+                    }
+                }
+                /*
+                int num = threads.get(j).getFigure().getPosY();
+                if (num < -30 || num > WINDOW_WIDTH + 30 ){
+                    threads.get(j).stop();
+                    threads.remove(threads.get(j));                
+                }
+                */
+            }
+        }
+    }
+    
     
     public void suspendThreads(){
         Lane[] listTrack = track.getListTrack();
@@ -114,6 +141,7 @@ public class ThreadController extends Thread implements CONSTANTS{
     public void run(){
         while(true){
             stopThread();
+            controlCollision();
             try{
                 Thread.sleep(50);   
             }catch(Exception e){}

@@ -9,6 +9,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import javax.imageio.ImageIO;
 
 
@@ -22,14 +24,20 @@ public class Track implements CONSTANTS {
     private Lane[] listTrack = new Lane[LANE_QUANTITY];
     private Image barrierOff;
     private Image barrierOn;
+    private ArrayList<Integer> listLane;
+    private ArrayList<Integer> listLaneAux;
     
     //Singleton Pattern
     private static Track track;
     
     private Track(){
+        listLane = new ArrayList<>();
+        listLaneAux = new ArrayList<>();
         for (int i = 0; i < LANE_QUANTITY; i++ ){
             listTrack[i] = new Lane();
+            listLane.add(i);
         }
+        
         try{
             //Carga y arreglo del tamaño de las barreras
             barrierOff = ImageIO.read(new File("src/images/barrierOff.png"));
@@ -92,6 +100,16 @@ public class Track implements CONSTANTS {
                 listTrack[i].getRunnerList().get(j).getFigure().setShowImage(pStatus);
             }
         }
+    }
+    
+    public int getLane(){
+        if (listLaneAux.size() == 0){
+            listLaneAux = (ArrayList<Integer>)listLane.clone();
+            Collections.shuffle(listLaneAux);
+        }
+        int lane = listLaneAux.get(0);
+        listLaneAux.remove(0);
+        return lane;
     }
     
     public Lane[] getListTrack() {

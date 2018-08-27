@@ -28,7 +28,8 @@ public class ThreadCreator extends Thread{
     
     //Este metodo debe verificar los carriles disponibles y etc
     public void insertRunners() throws InterruptedException{
-        int num = (int)(Math.random() * 11 + 1) - 1;
+        
+        int num = track.getLane();//(int)(Math.random() * 11 + 1) - 1;
         track.addFigure(num, direction, speed, showImages); // posX, posY, speed
         int index = track.getListTrack()[num].getRunnerList().size()-1;
         startRunner(track.getListTrack()[num].getRunnerList().get(index)); //Inicia el hilo que acaba de insertar
