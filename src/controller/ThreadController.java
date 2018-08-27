@@ -101,7 +101,6 @@ public class ThreadController extends Thread implements CONSTANTS{
             this.resume();
             state = true;
         }
-           
     }
     
     public void startRunner(ThreadRunner pThread) throws InterruptedException{
