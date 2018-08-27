@@ -7,6 +7,7 @@ package view;
 
 import java.awt.Graphics;
 import controller.ThreadController;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,12 +17,15 @@ public class GraphicInterface extends javax.swing.JFrame {
 
     private ThreadController controller;
     private boolean checkStatus;
+    private boolean interruptStatus;
     
     public GraphicInterface() {
         initComponents();
         checkStatus = false;
+        interruptStatus = true;
         controller = new ThreadController();
         trackView1.create();
+        controller.start();
     }
     
 
@@ -35,13 +39,14 @@ public class GraphicInterface extends javax.swing.JFrame {
         btnSimulation = new javax.swing.JButton();
         btnInterrupt = new javax.swing.JButton();
         btnRevert = new javax.swing.JButton();
-        jbtBarrier = new javax.swing.JToggleButton();
         cbxImages = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
         txtBarrier = new javax.swing.JTextField();
         txtValue = new javax.swing.JTextField();
         btnCreate = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
+        btnAllBarriers = new javax.swing.JButton();
+        btnBarries = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -81,13 +86,6 @@ public class GraphicInterface extends javax.swing.JFrame {
             }
         });
 
-        jbtBarrier.setText("Activate");
-        jbtBarrier.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtBarrierActionPerformed(evt);
-            }
-        });
-
         cbxImages.setText("Images");
         cbxImages.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,41 +108,54 @@ public class GraphicInterface extends javax.swing.JFrame {
             }
         });
 
+        btnAllBarriers.setText("Deactivate All Barriers");
+        btnAllBarriers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAllBarriersActionPerformed(evt);
+            }
+        });
+
+        btnBarries.setText("Activate");
+        btnBarries.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBarriesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(trackView1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(cmbSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2))
+                        .addComponent(txtValue, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnCreate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(42, 42, 42)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtValue, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(46, 46, 46)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtBarrier, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 76, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbtBarrier, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(99, 99, 99)))
+                        .addComponent(txtBarrier, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBarries, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAllBarriers, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnInterrupt, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
                     .addComponent(btnRevert, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cbxImages)
-                    .addComponent(btnSimulation))
-                .addGap(28, 28, 28))
+                    .addComponent(btnSimulation, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19))
             .addComponent(jSeparator2)
+            .addComponent(trackView1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,28 +164,30 @@ public class GraphicInterface extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtBarrier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(btnRevert)
-                    .addComponent(cbxImages))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cmbSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2)
+                        .addComponent(txtValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtBarrier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3)
+                        .addComponent(btnRevert)
+                        .addComponent(btnBarries))
+                    .addComponent(cbxImages, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtBarrier)
+                    .addComponent(btnCreate)
                     .addComponent(btnInterrupt)
-                    .addComponent(btnSimulation))
-                .addGap(40, 40, 40))
+                    .addComponent(btnSimulation)
+                    .addComponent(btnAllBarriers))
+                .addGap(10, 10, 10))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtBarrierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtBarrierActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jbtBarrierActionPerformed
 
     private void cbxImagesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxImagesActionPerformed
@@ -188,11 +201,17 @@ public class GraphicInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_txtValueActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
-        controller.insertRunners(Integer.parseInt(this.txtValue.getText()), cmbSpeed.getSelectedIndex()+1);
-        controller.start();
+        controller.createThreads(Integer.parseInt(this.txtValue.getText()), cmbSpeed.getSelectedIndex()+1);
+        txtValue.setText("");
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnInterruptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInterruptActionPerformed
+        if(interruptStatus){
+            btnInterrupt.setText("Continue");
+        }else{
+            btnInterrupt.setText("Interrupt");
+        }
+        interruptStatus = !interruptStatus;
         controller.stateThread();
     }//GEN-LAST:event_btnInterruptActionPerformed
 
@@ -201,9 +220,26 @@ public class GraphicInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRevertActionPerformed
 
     private void btnSimulationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimulationActionPerformed
-        // TODO add your handling code here:
         trackView1.continueThread();
     }//GEN-LAST:event_btnSimulationActionPerformed
+
+    private void btnBarriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBarriesActionPerformed
+        String barriers = txtBarrier.getText();
+        if(barriers.equals("")){
+            controller.getTrack().activateAllBarriers();
+        }else{
+            String barrierList[] = barriers.split(",");
+            for(int i = 0; i < barrierList.length; i++){
+                int lane = Integer.parseInt(barrierList[i]);
+               controller.getTrack().activateBarrier(lane-1);
+            }
+        }
+        txtBarrier.setText("");
+    }//GEN-LAST:event_btnBarriesActionPerformed
+
+    private void btnAllBarriersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllBarriersActionPerformed
+        controller.getTrack().deactivateAllBarriers();
+    }//GEN-LAST:event_btnAllBarriersActionPerformed
 
     /**
      * @param args the command line arguments
@@ -241,6 +277,8 @@ public class GraphicInterface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAllBarriers;
+    private javax.swing.JButton btnBarries;
     private javax.swing.JButton btnCreate;
     private javax.swing.JButton btnInterrupt;
     private javax.swing.JButton btnRevert;
@@ -250,7 +288,6 @@ public class GraphicInterface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JToggleButton jbtBarrier;
     private view.TrackView trackView1;
     private javax.swing.JTextField txtBarrier;
     private javax.swing.JTextField txtValue;

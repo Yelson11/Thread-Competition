@@ -8,12 +8,16 @@ package view;
 import model.*;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import model.ThreadRunner;
 
@@ -23,9 +27,8 @@ import model.ThreadRunner;
  */
 public class TrackView extends javax.swing.JPanel implements Runnable{
     
-    int x = getWidth()/2; //La mitad del lienzo
-    int y = getWidth()/2;
     Thread hilo;
+    private Image background;
     private Track track;
     private int sleepThreadTime;
     private int sleepTimePaint;
@@ -40,23 +43,27 @@ public class TrackView extends javax.swing.JPanel implements Runnable{
         hilo = new Thread(this);
         track = Track.getInstance();
         state = true;
+        try{
+            background = ImageIO.read(new File("src/images/street.png"));
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
 
     public void paint(Graphics g){
-        g.setColor(Color.GRAY);
-        g.fillRect(0, 0, getWidth(), getHeight()); //Rellena el fondo
+        //Background
+        g.drawImage(background, 0, 0, this);
         
         Lane[] listTrack = track.getListTrack();
+        track.drawBarriers(g);
         for(int i = 0; i < listTrack.length; i++){
             ArrayList<ThreadRunner> threads = listTrack[i].getRunnerList();
             for(int j = 0; j < threads.size(); j++){
                 threads.get(j).getFigure().draw(g);
             }
         }
-        
     }
    
-    
     public void create(){
         hilo.start();
     }

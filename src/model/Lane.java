@@ -7,21 +7,22 @@ package model;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author Administrator
- */
 public class Lane {
     private ArrayList<ThreadRunner> runnerList;
+    private boolean barrier;
     
     public Lane() {
         this.runnerList = new ArrayList<ThreadRunner>();
+        barrier = false;
     }
 
     public void revert(){
         for(int i = 0; i < runnerList.size(); i++){
             runnerList.get(i).getFigure().revert();
         }
+    }
+    public void changeBarrierStatus(){
+        barrier = !barrier;
     }
     public ArrayList<ThreadRunner> getRunnerList() {
         return runnerList;
@@ -31,5 +32,10 @@ public class Lane {
         this.runnerList = runnerList;
     }
     
-    
+    public void setBarrier(boolean pState){
+        barrier = pState;
+    }
+    public boolean getBarrier(){
+        return barrier;
+    }
 }
