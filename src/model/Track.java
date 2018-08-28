@@ -74,24 +74,29 @@ public class Track implements CONSTANTS {
     }
      
     public void activateAllBarriers(){
-        for(int i = 0; i < this.listTrack.length; i++){
-             this.listTrack[i].setBarrier(true);
-         }
+        for (Lane listTrack1 : this.listTrack) {
+            listTrack1.setBarrier(true);
+        }
     }
     
     public void deactivateAllBarriers(){
-        for(int i = 0; i < this.listTrack.length; i++){
-             this.listTrack[i].setBarrier(false);
-         }
+        for (Lane listTrack1 : this.listTrack) {
+            listTrack1.setBarrier(false);
+        }
     }
     
     public void activateBarrier(int pLane){
         this.listTrack[pLane].changeBarrierStatus();
     }
      
-    public void addFigure(int pLane, int pDirection, int pSpeed, boolean pShowImage){
+    public ThreadRunner addFigure(int pLane, int pDirection, int pSpeed, boolean pShowImage){
         ThreadRunner threadRunner = new ThreadRunner(pLane, pDirection, pSpeed, pShowImage);
-        listTrack[pLane].getRunnerList().add(threadRunner);
+        if (pDirection == 1)
+            listTrack[pLane].getRunnerList().add(threadRunner);
+        else{
+            listTrack[pLane].getRunnerList().add(0, threadRunner);
+        } 
+        return threadRunner;
     }
     
     public void changeImageStatus(boolean pStatus){
@@ -103,7 +108,7 @@ public class Track implements CONSTANTS {
     }
     
     public int getLane(){
-        if (listLaneAux.size() == 0){
+        if (listLaneAux.isEmpty()){
             listLaneAux = (ArrayList<Integer>)listLane.clone();
             Collections.shuffle(listLaneAux);
         }

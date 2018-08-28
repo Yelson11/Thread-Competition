@@ -30,15 +30,14 @@ public class ThreadCreator extends Thread{
     public void insertRunners() throws InterruptedException{
         
         int num = track.getLane();//(int)(Math.random() * 11 + 1) - 1;
-        track.addFigure(num, direction, speed, showImages); // posX, posY, speed
-        int index = track.getListTrack()[num].getRunnerList().size()-1;
-        startRunner(track.getListTrack()[num].getRunnerList().get(index)); //Inicia el hilo que acaba de insertar
+        ThreadRunner threadRunner = track.addFigure(num, direction, speed, showImages); // posX, posY, speed 
+        startRunner(threadRunner); //Inicia el hilo que acaba de insertar
         createdQuantity ++;
     }
     
     public void startRunner(ThreadRunner pThread) throws InterruptedException{
         pThread.start();
-        Thread.sleep(1000);
+        Thread.sleep(1000); //distancia entre las figuras de un mismo carril
     }
     
     public void run(){

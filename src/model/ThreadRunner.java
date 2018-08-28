@@ -20,13 +20,16 @@ public class ThreadRunner extends Thread implements CONSTANTS{
     private int speed;
     private int x;
     private int y;
+    private boolean stateMove;
 
     public ThreadRunner(int pPosX, int pPosY, int pSpeed, boolean pShowImage){
         figure = new Figure(pPosX ,pPosY, pSpeed, pShowImage); //posX tiene que * la "metrica"
         speed = pSpeed;
         x = pPosX; //aqui es la posicion del carril
         y = pPosY;
+        stateMove = true;
     }
+    
     public void breakRunner(){
         try {
             Thread.sleep(50);
@@ -38,8 +41,13 @@ public class ThreadRunner extends Thread implements CONSTANTS{
         try{
             //Thread.sleep(500);
             while(true){
-                figure.move();
-                Thread.sleep(speed*25);
+                if (stateMove){
+                    figure.move();
+                    Thread.sleep(speed*25);
+                }
+                else{
+                    Thread.sleep(100);
+                }
             }
         }catch (InterruptedException ex) {
             Logger.getLogger(TrackView.class.getName()).log(Level.SEVERE, null, ex);
@@ -49,6 +57,10 @@ public class ThreadRunner extends Thread implements CONSTANTS{
     //Getters and Setters
      public int getSpeed() {
         return speed;
+    }
+     
+    public void setStateMove(boolean state){
+        stateMove = state;
     }
 
     public void setSpeed(int speed) {
