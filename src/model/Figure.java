@@ -62,7 +62,7 @@ public class Figure implements CONSTANTS{
             posY = -30;
     }
 
-    public void move() {
+    public void move() { 
         posY += direction;
     }
     

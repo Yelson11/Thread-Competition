@@ -63,9 +63,6 @@ public class ThreadController extends Thread implements CONSTANTS{
         track.controlCollision();
     }
     
-    public void controlBarriers(){
-        track.controlBarriers();
-    }
     public void suspendThreads(){
         Lane[] listTrack = track.getListTrack();
         for(int i = 0; i < listTrack.length; i++){
@@ -128,7 +125,6 @@ public class ThreadController extends Thread implements CONSTANTS{
         while(true){
             stopThread();
             controlCollision();
-            controlBarriers();
             try{
                 Thread.sleep(50);   
             }catch(Exception e){}

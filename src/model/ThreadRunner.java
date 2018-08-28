@@ -21,6 +21,7 @@ public class ThreadRunner extends Thread implements CONSTANTS{
     private int x;
     private int y;
     private boolean stateMove;
+    private boolean barrier;
 
     public ThreadRunner(int pPosX, int pPosY, int pSpeed, boolean pShowImage){
         figure = new Figure(pPosX ,pPosY, pSpeed, pShowImage); //posX tiene que * la "metrica"
@@ -39,15 +40,12 @@ public class ThreadRunner extends Thread implements CONSTANTS{
     }
     public void run(){
         try{
-            //Thread.sleep(500);
             while(true){
-                if (stateMove){
+                if (!barrier && stateMove){
                     figure.move();
                     Thread.sleep(speed*25);
-                }
-                else{
-                    Thread.sleep(110);
-                    stateMove = true;
+                }else{
+                    Thread.sleep(250);
                 }
             }
         }catch (InterruptedException ex) {
@@ -87,4 +85,9 @@ public class ThreadRunner extends Thread implements CONSTANTS{
     public Figure getFigure(){
         return this.figure;
     }
+
+    public void setBarrier(boolean barrier) {
+        this.barrier = barrier;
+    }
+    
 }

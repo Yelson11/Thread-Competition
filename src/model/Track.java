@@ -130,10 +130,4 @@ public class Track implements CONSTANTS {
             listTrack1.controlCollision();
         }
     }
-    
-    public void controlBarriers(){
-        for (Lane listTrack1 : this.listTrack) {
-            listTrack1.controlBarriers();
-        }
-    }
 }

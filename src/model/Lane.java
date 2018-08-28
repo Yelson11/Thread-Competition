@@ -12,7 +12,7 @@ public class Lane implements CONSTANTS{
     private boolean barrier;
     private int direction;
     
-    public Lane() {
+    public Lane(){
         this.runnerList = new ArrayList<ThreadRunner>();
         barrier = false;
         direction = 1;
@@ -23,9 +23,6 @@ public class Lane implements CONSTANTS{
             runnerList.get(i).getFigure().revert();
         }
         direction *= -1;
-    }
-    
-    public void controlBarriers(){
     }
     
     public void controlCollision(){
@@ -57,6 +54,9 @@ public class Lane implements CONSTANTS{
     
     public void setBarrier(boolean pState){
         barrier = pState;
+        for(int i = 0; i<runnerList.size(); i++){
+            runnerList.get(i).setBarrier(barrier);
+        }
     }
     public boolean getBarrier(){
         return barrier;
