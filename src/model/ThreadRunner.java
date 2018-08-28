@@ -27,7 +27,13 @@ public class ThreadRunner extends Thread implements CONSTANTS{
         x = pPosX; //aqui es la posicion del carril
         y = pPosY;
     }
-    
+    public void breakRunner(){
+        try {
+            Thread.sleep(50);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ThreadRunner.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     public void run(){
         try{
             //Thread.sleep(500);

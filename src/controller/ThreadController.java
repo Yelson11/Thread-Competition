@@ -69,18 +69,10 @@ public class ThreadController extends Thread implements CONSTANTS{
             for(int j = 0; j < size; j++){
                 if (j != 0)
                 {
-                    if (threads.get(j-direction).getFigure().getPosY() < threads.get(j).getFigure().getPosY()+35){
+                    if(threads.get(j-direction).getFigure().getPosY() < threads.get(j).getFigure().getPosY()+35){
                         threads.get(j).setSpeed(threads.get(j-direction).getSpeed());
-                        System.out.println("JIJIJIJIJIJ");
                     }
                 }
-                /*
-                int num = threads.get(j).getFigure().getPosY();
-                if (num < -30 || num > WINDOW_WIDTH + 30 ){
-                    threads.get(j).stop();
-                    threads.remove(threads.get(j));                
-                }
-                */
             }
         }
     }
@@ -94,6 +86,9 @@ public class ThreadController extends Thread implements CONSTANTS{
                 threads.get(j).suspend();
             }
         }
+        for(int i = 0; i<threadPool.length; i++){
+            threadPool[i].suspend();   
+        }
     }
     
     public void resumeThreads(){
@@ -103,6 +98,9 @@ public class ThreadController extends Thread implements CONSTANTS{
             for(int j = 0; j < threads.size(); j++){
                 threads.get(j).resume();
             }
+        }
+        for(int i = 0; i<threadPool.length; i++){
+            threadPool[i].resume();   
         }
     }
     
