@@ -46,7 +46,8 @@ public class ThreadRunner extends Thread implements CONSTANTS{
                     Thread.sleep(speed*25);
                 }
                 else{
-                    Thread.sleep(100);
+                    Thread.sleep(110);
+                    stateMove = true;
                 }
             }
         }catch (InterruptedException ex) {

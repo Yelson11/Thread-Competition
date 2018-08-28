@@ -10,16 +10,19 @@ import java.util.ArrayList;
 public class Lane {
     private ArrayList<ThreadRunner> runnerList;
     private boolean barrier;
+    private int direction;
     
     public Lane() {
         this.runnerList = new ArrayList<ThreadRunner>();
         barrier = false;
+        direction = 1;
     }
 
     public void revert(){
         for(int i = 0; i < runnerList.size(); i++){
             runnerList.get(i).getFigure().revert();
         }
+        direction *= -1;
     }
     public void changeBarrierStatus(){
         barrier = !barrier;
@@ -38,4 +41,19 @@ public class Lane {
     public boolean getBarrier(){
         return barrier;
     }
+    
+    public void controlCollision(){
+        int size = runnerList.size();
+        for(int j = 0; j < size-1; j++){
+            if (direction == 1){
+                if(runnerList.get(j).getFigure().getPosY() < runnerList.get(j+1).getFigure().getPosY()+35)
+                    runnerList.get(j+1).setStateMove(false);
+            }
+            else{
+                if(runnerList.get(j).getFigure().getPosY() < runnerList.get(j+1).getFigure().getPosY()+35)
+                    runnerList.get(j).setStateMove(false);
+            }
+        }
+    }
+    
 }

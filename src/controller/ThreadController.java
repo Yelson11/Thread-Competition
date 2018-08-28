@@ -60,6 +60,8 @@ public class ThreadController extends Thread implements CONSTANTS{
     }
     
     public void controlCollision(){
+        track.controlCollision();
+        /*
         Lane[] listTrack = track.getListTrack();
         for(int i = 0; i < listTrack.length; i++){
             ArrayList<ThreadRunner> threads = listTrack[i].getRunnerList();
@@ -67,20 +69,19 @@ public class ThreadController extends Thread implements CONSTANTS{
             for(int j = 0; j < size-1; j++){
                 if (direction == 1){
                     if(threads.get(j).getFigure().getPosY() < threads.get(j+1).getFigure().getPosY()+35)
-                        //threads.get(j+1).setSpeed(threads.get(j).getSpeed());
                         threads.get(j+1).setStateMove(false);
                     else 
                         threads.get(j+1).setStateMove(true);
                 }
                 else{
                     if(threads.get(j).getFigure().getPosY() < threads.get(j+1).getFigure().getPosY()+35)
-                        //threads.get(j).setSpeed(threads.get(j+1).getSpeed()); 
                         threads.get(j).setStateMove(false);
                     else
                         threads.get(j).setStateMove(true);
                 }
             }
         }
+        */
     }
     
     public void suspendThreads(){

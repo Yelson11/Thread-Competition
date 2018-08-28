@@ -37,7 +37,7 @@ public class ThreadCreator extends Thread{
     
     public void startRunner(ThreadRunner pThread) throws InterruptedException{
         pThread.start();
-        Thread.sleep(1000); //distancia entre las figuras de un mismo carril
+        Thread.sleep(800); //distancia entre las figuras de un mismo carril
     }
     
     public void run(){

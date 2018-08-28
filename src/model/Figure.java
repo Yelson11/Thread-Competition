@@ -115,4 +115,8 @@ public class Figure implements CONSTANTS{
         return (int) posY;
     }
     
+    public double getDirection(){
+        return direction;
+    }
+    
 }

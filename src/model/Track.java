@@ -124,4 +124,10 @@ public class Track implements CONSTANTS {
     public void setListTrack(Lane[] listTrack) {
         this.listTrack = listTrack;
     }
+    
+    public void controlCollision(){
+        for (Lane listTrack1 : this.listTrack) {
+            listTrack1.controlCollision();
+        }
+    }
 }
