@@ -54,7 +54,7 @@ public class ThreadRunner extends Thread implements CONSTANTS{
             Logger.getLogger(TrackView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+   
     //Getters and Setters
      public int getSpeed() {
         return speed;

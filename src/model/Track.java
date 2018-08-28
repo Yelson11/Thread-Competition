@@ -66,7 +66,7 @@ public class Track implements CONSTANTS {
      public void drawBarriers(Graphics g) {
          for(int i = 0; i < this.listTrack.length; i++){
              if(this.listTrack[i].getBarrier()){
-                 g.drawImage(barrierOn, 17 + (STREET_HORIZONTAL_SCALE * i), STREET_VERTICAL_SCALE, null);   
+                 g.drawImage(barrierOn, 17 + (STREET_HORIZONTAL_SCALE * i), STREET_VERTICAL_SCALE, null);
              }else{
                  g.drawImage(barrierOff, 17 + (STREET_HORIZONTAL_SCALE * i), STREET_VERTICAL_SCALE, null);   
              }
@@ -128,6 +128,12 @@ public class Track implements CONSTANTS {
     public void controlCollision(){
         for (Lane listTrack1 : this.listTrack) {
             listTrack1.controlCollision();
+        }
+    }
+    
+    public void controlBarriers(){
+        for (Lane listTrack1 : this.listTrack) {
+            listTrack1.controlBarriers();
         }
     }
 }

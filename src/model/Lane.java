@@ -7,7 +7,7 @@ package model;
 
 import java.util.ArrayList;
 
-public class Lane {
+public class Lane implements CONSTANTS{
     private ArrayList<ThreadRunner> runnerList;
     private boolean barrier;
     private int direction;
@@ -24,22 +24,8 @@ public class Lane {
         }
         direction *= -1;
     }
-    public void changeBarrierStatus(){
-        barrier = !barrier;
-    }
-    public ArrayList<ThreadRunner> getRunnerList() {
-        return runnerList;
-    }
-
-    public void setRunnerList(ArrayList<ThreadRunner> runnerList) {
-        this.runnerList = runnerList;
-    }
     
-    public void setBarrier(boolean pState){
-        barrier = pState;
-    }
-    public boolean getBarrier(){
-        return barrier;
+    public void controlBarriers(){
     }
     
     public void controlCollision(){
@@ -56,4 +42,23 @@ public class Lane {
         }
     }
     
+    public void changeBarrierStatus(){
+        barrier = !barrier;
+    }
+    
+    //Getters & Setters
+    public ArrayList<ThreadRunner> getRunnerList() {
+        return runnerList;
+    }
+
+    public void setRunnerList(ArrayList<ThreadRunner> runnerList) {
+        this.runnerList = runnerList;
+    }
+    
+    public void setBarrier(boolean pState){
+        barrier = pState;
+    }
+    public boolean getBarrier(){
+        return barrier;
+    }
 }
