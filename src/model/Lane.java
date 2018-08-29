@@ -57,7 +57,7 @@ public class Lane implements CONSTANTS{
                 }
             }
         }
-        if (size>0){
+        if (size > 0){
             if (direction == 1){
                 if (!runnerList.get(0).getStateMove() && barrier && runnerList.get(0).getFigure().getPosY() > STREET_VERTICAL_SCALE+25)
                     runnerList.get(0).setStateMove(true);
@@ -66,7 +66,7 @@ public class Lane implements CONSTANTS{
                 if (!runnerList.get(size-1).getStateMove() && barrier && runnerList.get(size-1).getFigure().getPosY() < STREET_VERTICAL_SCALE-25)
                     runnerList.get(size-1).setStateMove(true);
             }
-        }    
+        }
     }    
     
     public void changeBarrierStatus(){
