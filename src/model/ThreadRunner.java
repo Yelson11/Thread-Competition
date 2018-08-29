@@ -38,14 +38,23 @@ public class ThreadRunner extends Thread implements CONSTANTS{
             Logger.getLogger(ThreadRunner.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
     public void run(){
         try{
             while(true){
-                if (stateMove){
-                    figure.move();
-                    Thread.sleep(speed*25);
+                if (stateMove){ 
+                    if (!(barrier && figure.getPosY() == STREET_VERTICAL_SCALE+20) && figure.getDirection()!=1){
+                        figure.move();
+                        Thread.sleep(speed*25);
+                    }
+                    else if (!(barrier && figure.getPosY() == STREET_VERTICAL_SCALE-25) && figure.getDirection()==1){
+                        figure.move();
+                        Thread.sleep(speed*25);
+                    }
+                    else
+                        Thread.sleep(10);
                 }else{
-                    Thread.sleep(100);
+                    Thread.sleep(10);
                 }
             }
         }catch (InterruptedException ex) {
@@ -60,6 +69,10 @@ public class ThreadRunner extends Thread implements CONSTANTS{
      
     public void setStateMove(boolean state){
         stateMove = state;
+    }
+    
+    public boolean getStateMove(){
+        return stateMove;
     }
 
     public void setSpeed(int speed) {
@@ -88,6 +101,10 @@ public class ThreadRunner extends Thread implements CONSTANTS{
 
     public void setBarrier(boolean barrier) {
         this.barrier = barrier;
+    }
+    
+    public void changeBarrier() {
+        this.barrier = !barrier;
     }
     
 }

@@ -15,13 +15,14 @@ public class ThreadCreator extends Thread{
     private int speed;
     private int direction;
     private int createdQuantity;
+    private boolean barrier;
     private boolean showImages;
     
     public ThreadCreator(int pSpeed, int pDirection, boolean pShowImages){
         track = Track.getInstance();
         speed = pSpeed;
         direction = pDirection;
-        showImages = pShowImages; 
+        showImages = pShowImages;
         quantity = 0;
         createdQuantity = 0;
     }

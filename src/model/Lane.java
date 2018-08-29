@@ -39,8 +39,37 @@ public class Lane implements CONSTANTS{
         }
     }
     
+    public void controlCollision_Aux(){
+        int size = runnerList.size();
+        for(int j = 0; j < size-1; j++){
+            if (direction == 1){
+                if (!runnerList.get(j+1).getStateMove()){
+                    if(runnerList.get(j).getFigure().getPosY() > runnerList.get(j+1).getFigure().getPosY()+35)
+                        runnerList.get(j+1).setStateMove(true);
+                }
+            }    
+            else{
+                if (!runnerList.get(j).getStateMove()){
+                    if(runnerList.get(j).getFigure().getPosY() > runnerList.get(j+1).getFigure().getPosY()+35)
+                        runnerList.get(j).setStateMove(true);
+                }
+            }
+        }
+        if (size>0){
+            if (direction == 1){
+                if (!runnerList.get(0).getStateMove() && barrier && runnerList.get(0).getFigure().getPosY() > STREET_VERTICAL_SCALE+25)
+                    runnerList.get(0).setStateMove(true);
+            }    
+            else{
+                if (!runnerList.get(size-1).getStateMove() && barrier && runnerList.get(size-1).getFigure().getPosY() < STREET_VERTICAL_SCALE-25)
+                    runnerList.get(size-1).setStateMove(true);
+            }
+        }    
+    }    
+    
     public void changeBarrierStatus(){
         barrier = !barrier;
+        setBarrier(barrier);
     }
     
     //Getters & Setters

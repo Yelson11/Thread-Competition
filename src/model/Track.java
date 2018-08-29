@@ -91,8 +91,10 @@ public class Track implements CONSTANTS {
      
     public ThreadRunner addFigure(int pLane, int pDirection, int pSpeed, boolean pShowImage){
         ThreadRunner threadRunner = new ThreadRunner(pLane, pDirection, pSpeed, pShowImage);
-        if (pDirection == 1)
+        threadRunner.setBarrier(listTrack[pLane].getBarrier());
+        if (pDirection == 1){
             listTrack[pLane].getRunnerList().add(threadRunner);
+            }
         else{
             listTrack[pLane].getRunnerList().add(0, threadRunner);
         } 
@@ -130,4 +132,11 @@ public class Track implements CONSTANTS {
             listTrack1.controlCollision();
         }
     }
+    
+    public void controlCollision_Aux(){
+        for (Lane listTrack1 : this.listTrack) {
+            listTrack1.controlCollision_Aux();
+        }
+    }
+    
 }

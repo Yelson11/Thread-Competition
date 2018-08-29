@@ -63,6 +63,10 @@ public class ThreadController extends Thread implements CONSTANTS{
         track.controlCollision();
     }
     
+    public void controlCollision_Aux(){
+        track.controlCollision_Aux();
+    }
+    
     public void suspendThreads(){
         Lane[] listTrack = track.getListTrack();
         for(int i = 0; i < listTrack.length; i++){
@@ -72,7 +76,7 @@ public class ThreadController extends Thread implements CONSTANTS{
             }
         }
         for(int i = 0; i<threadPool.length; i++){
-            threadPool[i].suspend();   
+            threadPool[i].suspend();    // para que deje de crear
         }
     }
     
@@ -94,7 +98,7 @@ public class ThreadController extends Thread implements CONSTANTS{
         for(int i = 0; i < size; i++){
             ArrayList<ThreadRunner> threads = track.getListTrack()[listNum.get(i)].getRunnerList();
             for(int j = 0; j < threads.size(); j++){
-                threads.get(j).suspend();
+                //threads.get(j).suspend();
             }
         }
     }
@@ -125,6 +129,7 @@ public class ThreadController extends Thread implements CONSTANTS{
         while(true){
             stopThread();
             controlCollision();
+            controlCollision_Aux();
             try{
                 Thread.sleep(50);   
             }catch(Exception e){}
