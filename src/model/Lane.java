@@ -13,7 +13,7 @@ public class Lane implements CONSTANTS{
     private int direction;
     
     public Lane(){
-        this.runnerList = new ArrayList<ThreadRunner>();
+        this.runnerList = new ArrayList<>();
         barrier = false;
         direction = 1;
     }
@@ -25,6 +25,7 @@ public class Lane implements CONSTANTS{
         direction *= -1;
     }
     
+    //Revisa que no choquen 
     public void controlCollision(){
         int size = runnerList.size();
         for(int j = 0; j < size-1; j++){
@@ -39,7 +40,8 @@ public class Lane implements CONSTANTS{
         }
     }
     
-    public void controlCollision_Aux(){
+    //Activa las figuras que estan estaticas
+    public void controlMove(){
         int size = runnerList.size();
         for(int j = 0; j < size-1; j++){
             if (direction == 1){

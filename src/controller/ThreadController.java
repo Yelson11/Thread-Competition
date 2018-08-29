@@ -64,7 +64,7 @@ public class ThreadController extends Thread implements CONSTANTS{
     }
     
     public void controlCollision_Aux(){
-        track.controlCollision_Aux();
+        track.controlMove();
     }
     
     public void suspendThreads(){

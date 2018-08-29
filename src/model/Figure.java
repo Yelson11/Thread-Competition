@@ -84,10 +84,10 @@ public class Figure implements CONSTANTS{
                     g.fillRect((int) posX, (int) posY, size, size);
                     break;
                 case 2:
-                    g.fillRect((int) posX, (int) posY, size, size);
+                    g.fillOval((int) posX, (int) posY, size, size);
                     break;
                 case 3:
-                    g.fillRect((int) posX, (int) posY, size, size);
+                    g.fillRect((int) posX+2, (int) posY, size-4, size+10);
                     break;
             }
         }
