@@ -61,60 +61,36 @@ public class ThreadController extends Thread implements CONSTANTS{
         threadPool[pSpeed-1].setQuantity(pQuantity);
     }
     
-    public void stopThread(){
-        Lane[] listTrack = track.getListTrack();
-        for(int i = 0; i < listTrack.length; i++){
-            ArrayList<ThreadRunner> threads = listTrack[i].getRunnerList();
-            for(int j = 0; j < threads.size(); j++){
-                int num = threads.get(j).getFigure().getPosY();
-                if (num < -30 || num > WINDOW_WIDTH + 30 ){
-                    threads.get(j).stop();
-                    threads.remove(threads.get(j));
-                }
-            }
-        }
-    }
-    
     public void controlCollision(){
         track.controlCollision();
     }
     
-    public void controlCollision_Aux(){
+    public void controlMove(){
         track.controlMove();
     }
     
-    public void suspendThreads(){
-        Lane[] listTrack = track.getListTrack();
-        for(int i = 0; i < listTrack.length; i++){
-            ArrayList<ThreadRunner> threads = listTrack[i].getRunnerList();
-            for(int j = 0; j < threads.size(); j++){
-                threads.get(j).suspend();
-            }
-        }
-        for(int i = 0; i<threadPool.length; i++){
-            threadPool[i].suspend();    // para que deje de crear
-        }
+    public void suspendThreads(){ // pone en espera todos los threads 
+        track.suspendThreads();
+        for (ThreadCreator threadPool1 : threadPool) 
+            threadPool1.suspend(); // para que deje de crear
     }
     
-    public void resumeThreads(){
-        Lane[] listTrack = track.getListTrack();
-        for(int i = 0; i < listTrack.length; i++){
-            ArrayList<ThreadRunner> threads = listTrack[i].getRunnerList();
-            for(int j = 0; j < threads.size(); j++){
-                threads.get(j).resume();
-            }
-        }
-        for(int i = 0; i<threadPool.length; i++){
-            threadPool[i].resume();   
-        }
+    public void resumeThreads(){ //reanuda todos los threads
+        track.resumeThreads();
+        for (ThreadCreator threadPool1 : threadPool)
+            threadPool1.resume();   
     }
     
-    public void barrier(ArrayList<Integer> listNum){
-        int size = listNum.size();
-        for(int i = 0; i < size; i++){
-            ArrayList<ThreadRunner> threads = track.getListTrack()[listNum.get(i)].getRunnerList();
+    public void stopThread(){ //Para el thread cuando termina la pista y lo elimina del ArrayList
+        Lane[] listTrack = track.getListTrack();
+        for (Lane listTrack1 : listTrack) {
+            ArrayList<ThreadRunner> threads = listTrack1.getRunnerList();
             for(int j = 0; j < threads.size(); j++){
-                //threads.get(j).suspend();
+                int posY = threads.get(j).getFigure().getPosY();
+                if (posY < -52 || posY > WINDOW_WIDTH + 30 ){
+                    threads.get(j).stop();
+                    threads.remove(threads.get(j));
+                }
             }
         }
     }
@@ -123,21 +99,20 @@ public class ThreadController extends Thread implements CONSTANTS{
         if (state){
             this.suspendThreads();
             this.suspend();
-            state = false;
+            state = !state;
         }
         else{
             this.resumeThreads();
             this.resume();
-            state = true;
+            state = !state;
         }
     }
 
     public void revert(){
         direction*= -1;
         track.revertDirection();
-        for(int i = 0; i < 3; i++){
+        for(int i = 0; i < 3; i++)
             threadPool[i].setDirection(direction);
-        }
     }
     
     @Override
@@ -145,7 +120,7 @@ public class ThreadController extends Thread implements CONSTANTS{
         while(true){
             stopThread();
             controlCollision();
-            controlCollision_Aux();
+            controlMove();
             try{
                 Thread.sleep(50);   
             }catch(Exception e){}

@@ -8,10 +8,6 @@ package controller;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Yelson
- */
 public class Simulator extends Thread{
     
     private ThreadController controller;
@@ -27,7 +23,8 @@ public class Simulator extends Thread{
             controller.simulateThreads();
             try {
                 Thread.sleep(time*1000);
-            } catch (InterruptedException ex) {
+            } 
+            catch (InterruptedException ex) {
                 Logger.getLogger(Simulator.class.getName()).log(Level.SEVERE, null, ex);
             }
         }

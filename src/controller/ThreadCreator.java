@@ -29,9 +29,8 @@ public class ThreadCreator extends Thread{
     
     //Este metodo verifica los carriles disponibles
     public void insertRunners() throws InterruptedException{
-        
-        int num = track.getLane();//(int)(Math.random() * 11 + 1) - 1;
-        ThreadRunner threadRunner = track.addFigure(num, direction, speed, showImages); // posX, posY, speed 
+        int posLane = track.getLane(); //getLane retorna la posicion del carril disponible para insertar
+        ThreadRunner threadRunner = track.addFigure(posLane, direction, speed, showImages); // posX, posY, speed 
         startRunner(threadRunner); //Inicia el hilo que acaba de insertar
         createdQuantity ++;
     }
@@ -43,14 +42,14 @@ public class ThreadCreator extends Thread{
     
     public void run(){
         try{
-            while(quantity >= createdQuantity){
-                if(quantity == createdQuantity){
+            while(createdQuantity <= quantity){ //la cantidad de creados se compara con la 
+                if(quantity == createdQuantity) //cantidad total que hay que crear 
                     Thread.sleep(100);
-                }else{
+                else
                     insertRunners();
-                }
             }
-        }catch(InterruptedException e){
+        }
+        catch(InterruptedException e){
             e.printStackTrace();
         }
     }

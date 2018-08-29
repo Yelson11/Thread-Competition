@@ -56,10 +56,10 @@ public class Figure implements CONSTANTS{
         }catch(IOException e){
             e.printStackTrace();
         }
-        if (direction!=1)
+        if (direction!=1)     //depediendo la direccion hace que aparezcan arriba o abajo
             posY = WINDOW_WIDTH + 30 ;
         else 
-            posY = -30;
+            posY = -52;
     }
 
     public void move() {  

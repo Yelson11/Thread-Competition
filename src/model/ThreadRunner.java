@@ -9,13 +9,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import view.TrackView;
 
-/**
- *
- * @author Yelson
- */
 public class ThreadRunner extends Thread implements CONSTANTS{    
     
-    private int sleepTime;
     private Figure figure;
     private int speed;
     private int x;
@@ -42,33 +37,21 @@ public class ThreadRunner extends Thread implements CONSTANTS{
     public void run(){
         try{
             while(true){
-                if (stateMove){ 
-                    if ((!(barrier && figure.getPosY() == STREET_VERTICAL_SCALE+20) && figure.getDirection()!=1)){
+                if (stateMove){ //si hay una barrera y la posicion del eje 'y' llega a la barrera no mueve la figura 
+                    if (!(barrier && figure.getPosY() == STREET_VERTICAL_SCALE+20) && figure.getDirection()!=1){
                         figure.move();
                         Thread.sleep(speed*25);
                     }
-<<<<<<< HEAD
-                    else if ((!(barrier && figure.getPosY() == STREET_VERTICAL_SCALE-25) && figure.getDirection()==1)){
-=======
-                    //else if (!(barrier && figure.getPosY() == STREET_VERTICAL_SCALE-25) && figure.getDirection()==1){
                     else if (!(barrier && figure.getPosY() == STREET_VERTICAL_SCALE-50) && figure.getDirection()==1){
->>>>>>> 2aaabb8ab22311b3db1e12f302ad6e9939a2b6e2
                         figure.move();
                         Thread.sleep(speed*25);
                     }
                     else
                         Thread.sleep(125);
-<<<<<<< HEAD
-                }    
-                else{
-                    if (!barrier)
-                        stateMove = true;
-=======
                 }else{
                     if(!barrier){
                         stateMove = true;
                     }
->>>>>>> 2aaabb8ab22311b3db1e12f302ad6e9939a2b6e2
                     Thread.sleep(125);
                 }
             }

@@ -5,10 +5,6 @@
  */
 package model;
 
-/**
- *
- * @author Yelson
- */
 public interface CONSTANTS {
     public static final int LANE_QUANTITY = 11;
     public static final int WINDOW_WIDTH = 600;

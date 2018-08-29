@@ -18,23 +18,22 @@ public class Lane implements CONSTANTS{
         direction = 1;
     }
 
-    public void revert(){
+    public void revert(){ //revierte cada thread del ArrayList
         for(int i = 0; i < runnerList.size(); i++){
             runnerList.get(i).getFigure().revert();
         }
         direction *= -1;
     }
-    
+   
     //Revisa que no choquen 
     public void controlCollision(){
-        //Cambie 35 por 55 para los carritos
         int size = runnerList.size();
         for(int j = 0; j < size-1; j++){
-            if (direction == 1){
+            if (direction == 1){ // si la direccion es para abajo revisa cada elemento con el anterior 
                 if(runnerList.get(j).getFigure().getPosY() < runnerList.get(j+1).getFigure().getPosY()+55)
                     runnerList.get(j+1).setStateMove(false);
             }
-            else{
+            else{ // si la direccion es para arriba revisa cada elemento con el posterior 
                 if(runnerList.get(j).getFigure().getPosY() < runnerList.get(j+1).getFigure().getPosY()+55)
                     runnerList.get(j).setStateMove(false);
             }
@@ -43,7 +42,6 @@ public class Lane implements CONSTANTS{
     
     //Activa las figuras que estan estaticas
     public void controlMove(){
-        //Cambie 35 por 55 para los carritos
         int size = runnerList.size();
         for(int j = 0; j < size-1; j++){
             if (direction == 1){
@@ -58,7 +56,7 @@ public class Lane implements CONSTANTS{
                         runnerList.get(j).setStateMove(true);
                 }
             }
-        }
+        }//Aqui verifica los extremos del ArrayList (dentro del for no se logro hacer)
         if (size > 0){
             if (direction == 1){
                 if (!runnerList.get(0).getStateMove() && barrier && runnerList.get(0).getFigure().getPosY() > STREET_VERTICAL_SCALE+25)
@@ -69,7 +67,19 @@ public class Lane implements CONSTANTS{
                     runnerList.get(size-1).setStateMove(true);
             }
         }
-    }    
+    }  
+    
+    public void suspendThreads(){
+        int size = runnerList.size();
+        for(int j = 0; j < size; j++)
+                runnerList.get(j).suspend();
+    }
+    
+    public void resumeThreads(){
+        int size = runnerList.size();
+        for(int j = 0; j < size; j++)
+                runnerList.get(j).resume();
+    }
     
     public void changeBarrierStatus(){
         barrier = !barrier;
