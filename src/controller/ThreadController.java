@@ -173,4 +173,8 @@ public class ThreadController extends Thread implements CONSTANTS{
         this.direction = direction;
     }
 
+    public ThreadCreator[] getThreadPool() {
+        return threadPool;
+    }
+
 }

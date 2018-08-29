@@ -53,7 +53,6 @@ public class TrackView extends javax.swing.JPanel implements Runnable{
     public void paint(Graphics g){
         //Background
         g.drawImage(background, 0, 0, this);
-        
         Lane[] listTrack = track.getListTrack();
         track.drawBarriers(g);
         for(int i = 0; i < listTrack.length; i++){
