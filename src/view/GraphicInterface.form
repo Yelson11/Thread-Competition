@@ -46,17 +46,35 @@
                   </Group>
                   <Component id="btnAllBarriers" min="-2" pref="180" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="82" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="btnInterrupt" pref="160" max="32767" attributes="0"/>
-                  <Component id="btnRevert" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace pref="106" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="cbxImages" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnSimulation" min="-2" pref="104" max="-2" attributes="0"/>
+                  <Component id="btnRevert" min="-2" pref="160" max="-2" attributes="0"/>
+                  <Component id="btnInterrupt" min="-2" pref="160" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="cbxImages" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnSimulation" alignment="0" min="-2" pref="104" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblSpeed2" min="-2" pref="55" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblSpeed1" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblSpeed3" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace pref="37" max="32767" attributes="0"/>
           </Group>
           <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
           <Component id="trackView1" alignment="0" max="32767" attributes="0"/>
@@ -68,27 +86,48 @@
               <Component id="trackView1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jSeparator2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                      <Component id="cmbSpeed" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtValue" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtBarrier" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnRevert" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnBarries" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="cbxImages" alignment="1" min="-2" max="-2" attributes="0"/>
-              </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnCreate" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnInterrupt" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnSimulation" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnAllBarriers" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="0" pref="9" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                              <Component id="cmbSpeed" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtValue" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtBarrier" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnRevert" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnBarries" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="cbxImages" alignment="1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnCreate" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnInterrupt" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnSimulation" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnAllBarriers" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblSpeed1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblSpeed2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblSpeed3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -197,6 +236,36 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBarriesActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Speed 1:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel4">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Speed 2:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel5">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Speed 3:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblSpeed1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblSpeed2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblSpeed3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

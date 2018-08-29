@@ -17,4 +17,5 @@ public interface CONSTANTS {
     public static final int STREET_VERTICAL_SCALE = 300; 
     public static final int RUNNER_IMAGE_WIDTH = 25; 
     public static final int RUNNER_IMAGE_HEIGHT = 50; 
+    public static final int MAX_THREADS = 30;
 }

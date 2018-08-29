@@ -19,9 +19,9 @@ public class Figure implements CONSTANTS{
     private Image imageUp;
     private Image imageDown;
     private boolean showImage;
-    private double posX;
-    private double posY;
-    private double direction;
+    private int posX;
+    private int posY;
+    private int direction;
     private int type;
     private Color color;
 
@@ -114,10 +114,10 @@ public class Figure implements CONSTANTS{
     }
     
     public int getPosY(){
-        return (int) posY;
+        return posY;
     }
     
-    public double getDirection(){
+    public int getDirection(){
         return direction;
     }
     

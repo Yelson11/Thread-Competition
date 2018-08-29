@@ -5,9 +5,14 @@
  */
 package view;
 
+import controller.Simulator;
 import java.awt.Graphics;
 import controller.ThreadController;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  *
@@ -18,16 +23,33 @@ public class GraphicInterface extends javax.swing.JFrame {
     private ThreadController controller;
     private boolean checkStatus;
     private boolean interruptStatus;
+    private boolean simulate;
+    private Simulator simulator;
+    private Timer updaterTimer; 
+    private TimerTask timerTask;
     
     public GraphicInterface() {
         initComponents();
         checkStatus = false;
+        simulate = false;
         interruptStatus = true;
-        controller = new ThreadController();
+        simulator = new Simulator();
+        controller = ThreadController.getInstace();
         trackView1.create();
         controller.start();
+        simulator.start();
+        simulator.suspend();
+        updaterTimer = new Timer();
+        timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                lblSpeed3.setText("" + controller.getThreadPool()[0].getCreatedQuantity());
+                lblSpeed2.setText("" + controller.getThreadPool()[1].getCreatedQuantity());
+                lblSpeed1.setText("" + controller.getThreadPool()[2].getCreatedQuantity());
+            }
+        };
+        updaterTimer.schedule(timerTask, 0, 100);
     }
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -47,6 +69,12 @@ public class GraphicInterface extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         btnAllBarriers = new javax.swing.JButton();
         btnBarries = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        lblSpeed1 = new javax.swing.JLabel();
+        lblSpeed2 = new javax.swing.JLabel();
+        lblSpeed3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -122,6 +150,18 @@ public class GraphicInterface extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Speed 1:");
+
+        jLabel4.setText("Speed 2:");
+
+        jLabel5.setText("Speed 3:");
+
+        lblSpeed1.setText("0");
+
+        lblSpeed2.setText("0");
+
+        lblSpeed3.setText("0");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -145,15 +185,29 @@ public class GraphicInterface extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBarries, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnAllBarriers, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnInterrupt, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                    .addComponent(btnRevert, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRevert, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnInterrupt, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cbxImages)
                     .addComponent(btnSimulation, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblSpeed2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblSpeed1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblSpeed3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(37, Short.MAX_VALUE))
             .addComponent(jSeparator2)
             .addComponent(trackView1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -163,24 +217,39 @@ public class GraphicInterface extends javax.swing.JFrame {
                 .addComponent(trackView1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(cmbSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2)
-                        .addComponent(txtValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtBarrier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel3)
-                        .addComponent(btnRevert)
-                        .addComponent(btnBarries))
-                    .addComponent(cbxImages, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCreate)
-                    .addComponent(btnInterrupt)
-                    .addComponent(btnSimulation)
-                    .addComponent(btnAllBarriers))
-                .addGap(10, 10, 10))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 9, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(cmbSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2)
+                                .addComponent(txtValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtBarrier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel3)
+                                .addComponent(btnRevert)
+                                .addComponent(btnBarries))
+                            .addComponent(cbxImages, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnCreate)
+                            .addComponent(btnInterrupt)
+                            .addComponent(btnSimulation)
+                            .addComponent(btnAllBarriers)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(lblSpeed1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(lblSpeed2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(lblSpeed3))))
+                .addGap(11, 11, 11))
         );
 
         pack();
@@ -220,7 +289,14 @@ public class GraphicInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRevertActionPerformed
 
     private void btnSimulationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimulationActionPerformed
-        trackView1.continueThread();
+        simulate = !simulate;
+        if(simulate){
+            simulator.resume();
+            btnSimulation.setText("Stop");
+        }else{
+            simulator.suspend();
+            btnSimulation.setText("Simulate");
+        }
     }//GEN-LAST:event_btnSimulationActionPerformed
 
     private void btnBarriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBarriesActionPerformed
@@ -285,9 +361,15 @@ public class GraphicInterface extends javax.swing.JFrame {
     private javax.swing.JButton btnSimulation;
     private javax.swing.JCheckBox cbxImages;
     private javax.swing.JComboBox<String> cmbSpeed;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel lblSpeed1;
+    private javax.swing.JLabel lblSpeed2;
+    private javax.swing.JLabel lblSpeed3;
     private view.TrackView trackView1;
     private javax.swing.JTextField txtBarrier;
     private javax.swing.JTextField txtValue;

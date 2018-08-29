@@ -21,7 +21,10 @@ public class ThreadController extends Thread implements CONSTANTS{
     private ThreadCreator[] threadPool;
     private boolean state;
     
-     public ThreadController(){
+    //Singleton Pattern
+    private static ThreadController controller;
+    
+     private ThreadController(){
         track = Track.getInstance();
         direction = 1;
         showImages = false;
@@ -33,6 +36,15 @@ public class ThreadController extends Thread implements CONSTANTS{
             threadPool[i].start();
         }
     }
+     
+    public static ThreadController getInstace() {
+        if(controller == null){
+            controller = new ThreadController();
+        }
+        return controller;
+    }
+     
+    //---------------------------------------------|
       
     public void changeImageStatus(boolean pStatus){
         track.changeImageStatus(pStatus);
@@ -40,7 +52,11 @@ public class ThreadController extends Thread implements CONSTANTS{
             threadPool[i].setShowImages(pStatus);
         }
     }
-    
+    public void simulateThreads(){
+        int quantity = (int)((Math.random())*MAX_THREADS + 1);
+        int speed = (int)((Math.random())*3 + 1);
+        createThreads(quantity, speed);
+    }
     public void createThreads(int pQuantity, int pSpeed){
         threadPool[pSpeed-1].setQuantity(pQuantity);
     }
@@ -155,6 +171,10 @@ public class ThreadController extends Thread implements CONSTANTS{
 
     public void setDirection(int direction) {
         this.direction = direction;
+    }
+
+    public ThreadCreator[] getThreadPool() {
+        return threadPool;
     }
 
 }

@@ -27,7 +27,7 @@ public class ThreadCreator extends Thread{
         createdQuantity = 0;
     }
     
-    //Este metodo debe verificar los carriles disponibles y etc
+    //Este metodo verifica los carriles disponibles
     public void insertRunners() throws InterruptedException{
         
         int num = track.getLane();//(int)(Math.random() * 11 + 1) - 1;
