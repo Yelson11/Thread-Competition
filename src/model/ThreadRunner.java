@@ -41,11 +41,11 @@ public class ThreadRunner extends Thread implements CONSTANTS{
     public void run(){
         try{
             while(true){
-                if (!barrier && stateMove){
+                if (stateMove){
                     figure.move();
                     Thread.sleep(speed*25);
                 }else{
-                    Thread.sleep(250);
+                    Thread.sleep(100);
                 }
             }
         }catch (InterruptedException ex) {
