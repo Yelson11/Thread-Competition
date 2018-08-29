@@ -5,6 +5,7 @@
  */
 package view;
 
+import controller.Simulator;
 import java.awt.Graphics;
 import controller.ThreadController;
 import java.util.ArrayList;
@@ -18,14 +19,20 @@ public class GraphicInterface extends javax.swing.JFrame {
     private ThreadController controller;
     private boolean checkStatus;
     private boolean interruptStatus;
+    private boolean simulate;
+    private Simulator simulator;
     
     public GraphicInterface() {
         initComponents();
         checkStatus = false;
+        simulate = false;
         interruptStatus = true;
-        controller = new ThreadController();
+        simulator = new Simulator();
+        controller = ThreadController.getInstace();
         trackView1.create();
         controller.start();
+        simulator.start();
+        simulator.suspend();
     }
     
 
@@ -220,7 +227,14 @@ public class GraphicInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRevertActionPerformed
 
     private void btnSimulationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimulationActionPerformed
-        trackView1.continueThread();
+        simulate = !simulate;
+        if(simulate){
+            simulator.resume();
+            btnSimulation.setText("Stop");
+        }else{
+            simulator.suspend();
+            btnSimulation.setText("Simulate");
+        }
     }//GEN-LAST:event_btnSimulationActionPerformed
 
     private void btnBarriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBarriesActionPerformed
