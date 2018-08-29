@@ -27,14 +27,15 @@ public class Lane implements CONSTANTS{
     
     //Revisa que no choquen 
     public void controlCollision(){
+        //Cambie 35 por 55 para los carritos
         int size = runnerList.size();
         for(int j = 0; j < size-1; j++){
             if (direction == 1){
-                if(runnerList.get(j).getFigure().getPosY() < runnerList.get(j+1).getFigure().getPosY()+35)
+                if(runnerList.get(j).getFigure().getPosY() < runnerList.get(j+1).getFigure().getPosY()+55)
                     runnerList.get(j+1).setStateMove(false);
             }
             else{
-                if(runnerList.get(j).getFigure().getPosY() < runnerList.get(j+1).getFigure().getPosY()+35)
+                if(runnerList.get(j).getFigure().getPosY() < runnerList.get(j+1).getFigure().getPosY()+55)
                     runnerList.get(j).setStateMove(false);
             }
         }
@@ -42,17 +43,18 @@ public class Lane implements CONSTANTS{
     
     //Activa las figuras que estan estaticas
     public void controlMove(){
+        //Cambie 35 por 55 para los carritos
         int size = runnerList.size();
         for(int j = 0; j < size-1; j++){
             if (direction == 1){
                 if (!runnerList.get(j+1).getStateMove()){
-                    if(runnerList.get(j).getFigure().getPosY() > runnerList.get(j+1).getFigure().getPosY()+35)
+                    if(runnerList.get(j).getFigure().getPosY() > runnerList.get(j+1).getFigure().getPosY()+55)
                         runnerList.get(j+1).setStateMove(true);
                 }
             }    
             else{
                 if (!runnerList.get(j).getStateMove()){
-                    if(runnerList.get(j).getFigure().getPosY() > runnerList.get(j+1).getFigure().getPosY()+35)
+                    if(runnerList.get(j).getFigure().getPosY() > runnerList.get(j+1).getFigure().getPosY()+55)
                         runnerList.get(j).setStateMove(true);
                 }
             }

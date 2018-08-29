@@ -47,14 +47,18 @@ public class ThreadRunner extends Thread implements CONSTANTS{
                         figure.move();
                         Thread.sleep(speed*25);
                     }
-                    else if (!(barrier && figure.getPosY() == STREET_VERTICAL_SCALE-25) && figure.getDirection()==1){
+                    //else if (!(barrier && figure.getPosY() == STREET_VERTICAL_SCALE-25) && figure.getDirection()==1){
+                    else if (!(barrier && figure.getPosY() == STREET_VERTICAL_SCALE-50) && figure.getDirection()==1){
                         figure.move();
                         Thread.sleep(speed*25);
                     }
                     else
-                        Thread.sleep(10);
+                        Thread.sleep(125);
                 }else{
-                    Thread.sleep(10);
+                    if(!barrier){
+                        stateMove = true;
+                    }
+                    Thread.sleep(125);
                 }
             }
         }catch (InterruptedException ex) {

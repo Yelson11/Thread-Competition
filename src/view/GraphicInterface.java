@@ -44,8 +44,8 @@ public class GraphicInterface extends javax.swing.JFrame {
             @Override
             public void run() {
                 lblSpeed3.setText("" + controller.getThreadPool()[0].getCreatedQuantity());
-                lblSpeed2.setText("" + controller.getThreadPool()[2].getCreatedQuantity());
-                lblSpeed1.setText("" + controller.getThreadPool()[1].getCreatedQuantity());
+                lblSpeed2.setText("" + controller.getThreadPool()[1].getCreatedQuantity());
+                lblSpeed1.setText("" + controller.getThreadPool()[2].getCreatedQuantity());
             }
         };
         updaterTimer.schedule(timerTask, 0, 100);
